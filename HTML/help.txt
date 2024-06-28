@@ -1,2 +1,0 @@
-you want to type this cmd "git push --set-upstream origin nik-working
-"
