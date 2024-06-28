@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Singup-page</title>
+    <style>
+        body{
+            background-color: #797d80;
+            font-family: arial, sans-serif;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            
+        }
+        #main-container{
+            background-color: white;
+            padding: 20px;
+            border: 2px solid black;
+            border-radius: 10px;
+            width: 85%;
+            max-width: 500px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        h1{
+            text-align: center;
+        }
+        label{
+            display: block;
+            margin-top: 10px;
+        }
+        input[type="text"], input[type="password"]{
+            width: 90%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        input{
+            outline-color: #660cdb;
+        }
+        button{
+            display: block;
+            width: 70%;
+            padding: 10px;
+            margin-top: 15px;
+            background-color: #470e91;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: large;
+            margin-left: 14%;
+        }
+        button:hover{
+            background-color: #660cdb;
+            transform:translateY(-2px)
+        }
+        #main-container:hover{
+            transform:translateY(-2px);
+            box-shadow: 0 0 15px black;
+        }
+    </style>
+</head>
+<body>
+    <div id="main-container">
+        <h1>Singup Here</h1>
+        <form id="login-from">
+            <label for="first name">First Name:</label>
+            <input type="text" name="first name" id="first name" placeholder="" required> <br>
+            
+            <label for="last name">Last Name:</label>
+            <input type="text" name="last name" id="last name" placeholder="" required> <br>
+
+            <label for="email">Email:</label>
+            <input type="text" name="email" id="email" placeholder="xyz123@gamil.com" required> <br>
+
+            <label for="Create password">Create password:</label>
+            <input type="password" name="Create password" id="Create password" placeholder="Enter strong password" required> <br>
+
+            <label for="Re-Enter password">Re-Enter password:</label>
+            <input type="password" name="Re-Enter password" id="Re-Enter password" placeholder="Re-Enter your password" required>
+
+            <button type="submit">Singup</button>
+        </form>
+
+    </div>
+</body>
+</html>
