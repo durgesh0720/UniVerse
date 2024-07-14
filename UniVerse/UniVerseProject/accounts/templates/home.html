@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>univers-website</title>
+    <!-- <link rel="stylesheet" href="home_style.css"> -->
+    <style>    
+        *{
+            margin: 0;
+            padding: 0;
+            font-family: 'poppins', sans-serif;
+            box-sizing: border-box;
+        }
+        body{
+            background-color: #6E6E6E;
+            color: white;
+        }
+        nav{
+            display: flex;
+            align-items: flex-end;
+            justify-content: flex-end;
+            flex-wrap: wrap;
+            margin-right: 5%;
+        }
+        nav ul li{
+            display: inline-block;
+            list-style: none;
+            margin: 10px 10px;
+            font-size: 20px;
+        }
+        nav ul li a{
+            color: #fff;
+            text-decoration: none;
+            position: relative;
+        }
+        nav ul li button{
+            border: none;
+            border-radius: 3px;
+            padding: 6px;
+            background-color: #BCFD4C;
+            color: #FF6A3D;
+        }
+        
+        #slogan h2 span{
+            color: #BCFD4C;
+            font-size: larger;
+        }
+        #slogan h2{
+            margin: 20px 15px;
+        }
+        
+        #main-container {
+            display: flex;
+            flex-direction:column;
+            background-color: #fff;
+            color: black;
+            padding: 20px;
+            border: 2px solid black;
+            border-radius: 10px;
+            width: 95%;
+            max-width: 500px;
+            height: auto;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin: 20px auto; /* Centers the container horizontally */
+    
+        }
+            
+            #text-h1 {
+                text-align: center;
+                margin-bottom: 10%;
+            }
+            
+            #or {
+                text-align: center;
+                margin: 10% 0;
+            }
+            
+            button {
+                background-color: #4CAF50; /* Optional button color */
+                color: white;
+                padding: 10px 20px;
+                margin: 10px 0;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+            }    
+            button:hover {
+                background-color: #45a049;
+            }
+            
+    </style>
+</head>
+<body>
+    <div id="header">
+        <div class="container">
+            <nav>
+                
+                <ul>
+                    <li><a href="#"></a>Home</li>
+                    <li><a href="#"></a>Notice</li>
+                    <li><button type="submit"><a href="{%url 'login'%}">Login</a></button></li>
+                    <li><button type="submit"><a href="{%url 'signup'%}">Signup</a></button></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <div id="slogan">
+        <h2>We serve the <span>Students.</span></h2>
+    </div>
+    <div id="main-container">
+        <h2 id="text-h1">Enter in the UniVerse</h2>
+        <button><a href="{%url 'login'%}">login</a></button>
+        <h2 id="or">OR</h2>
+        <button><a href="{%url 'signup'%}">Signup</a></button>
+    </div>
+
+    <!-- <script>
+        function openPageLogin() {
+            window.location.href = 'login.html';
+        }
+        function openPageSingup() {
+            window.location.href = 'signup.html';
+        }
+    </script> -->
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            background-color: #FDDE55;
+            font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .main-box{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+            margin: 20px;
+        }
+        .head {
+            margin-top: 20px;
+            width: 100%;
+            background-color: #03AED2;
+        }
+        .head header{
+            font-size: 200%;
+            text-align: center;
+            color: white;
+        }
+        .navbar{
+            margin-top: 20px;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        .navbar nav{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            align-items: center;
+            margin: 10px;
+        }
+        .navbar nav button{
+            padding: 10px;
+        }
+        .main-head{
+            background-color: #03AED2;
+            width: 100%;
+            margin-bottom: 20px;
+            padding: 10px;
+        }
+        .main-head header{
+            color: white;
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+        .Annoucements{
+            width: 100%;
+            background-color: #68D2E8;
+            margin-bottom: 20px;
+            padding: 10px;
+        }
+        .Annoucements header{
+            font-size: 1.1rem;
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .Annoucements span{
+            display: block;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="main-box">
+        <div class="head">
+            <Header>Welcome to Name</Header>
+        </div>
+        <div class="navbar">
+            <nav>
+                <button>Class Status</button>
+                <button>Dashboard</button>
+                <button>Profile</button>
+                <button>Masseges</button>
+            </nav>
+        </div>
+        <div class="main-head">
+            <header>College news and Posts</header>
+        </div>
+        <div class="Annoucements">
+            <header>Official Annoucements</header>
+            <span>Importaint updates form college Administration</span>
+        </div>
+        <div class="Annoucements">
+            <header>Events and Activities</header>
+            <span>Information about upcoming events, workshops, seminars, and competitions.</span>
+        </div>
+        <div class="Annoucements">
+            <header>Communitiy Posts</header>
+            <span>Allow students to post their achievements, thoughts, and experiences.</span>
+        </div>
+    </div>
+</body>
+</html>
