@@ -1,3 +1,4 @@
+{% extends "home.html" %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -72,9 +73,13 @@
             margin-top: 10px;
             color: red;
         }
+        a{
+            text-decoration: none;
+        }
     </style>
 </head>
 <body>
+    {% block auth %}
     <div id="main-container">
         <h1>Login</h1>
         <form action="{% url 'checkUser' %}" method="post" id="login-form">
@@ -90,10 +95,13 @@
     
             <button type="submit">Login</button>
         </form>
+        
         <div id="error">
             {{errmsg}}
+            <a href="{% url 'signup' %}">. signup</a>
         </div>
     </div>
+    
     <script>
         const passwordInput = document.getElementById('password');
         const showPasswordCheckbox = document.getElementById('show-password');
@@ -106,5 +114,6 @@
             }
         });
     </script>
+    {% endblock %}
 </body>
 </html>

@@ -49,7 +49,6 @@
         #slogan h2{
             margin: 20px 15px;
         }
-        
         #main-container {
             display: flex;
             flex-direction:column;
@@ -88,7 +87,14 @@
             button:hover {
                 background-color: #45a049;
             }
-            
+            #main-container button a{
+                width: 100%;
+                display: block;
+                height: 30px;
+                text-decoration: none;
+                font-size: 1.5em;
+                color: white;
+            }
     </style>
 </head>
 <body>
@@ -108,13 +114,14 @@
     <div id="slogan">
         <h2>We serve the <span>Students.</span></h2>
     </div>
+    {% block auth %}
     <div id="main-container">
         <h2 id="text-h1">Enter in the UniVerse</h2>
-        <button><a href="{%url 'login'%}">login</a></button>
+        <button><a href="{%url 'login'%}">Login</a></button>
         <h2 id="or">OR</h2>
         <button><a href="{%url 'signup'%}">Signup</a></button>
     </div>
-
+    {% endblock %}
     <!-- <script>
         function openPageLogin() {
             window.location.href = 'login.html';
