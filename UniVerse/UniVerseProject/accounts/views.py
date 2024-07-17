@@ -1,7 +1,6 @@
 from django.shortcuts import render
 from .models import student_registration
 from django.shortcuts import redirect
-from django.http import HttpResponse
 from django.views.decorators.csrf import requires_csrf_token
 from django.views.decorators.csrf import csrf_protect, ensure_csrf_cookie
 import logging
@@ -26,7 +25,7 @@ def login(request):
         if request.GET['error']==str(1):
             d1['errmsg']="Username and password dosen't matched "
     except:
-        d1['errmsg']=''
+        d1['errmsg']=""
     return render(request,"login.html",d1)
 
 @csrf_protect

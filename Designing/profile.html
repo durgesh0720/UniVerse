@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Name</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            background-color:salmon;
+        }
+        .container{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .profile-picture{
+            border: 2px solid black;
+            width: 150px;
+            height: 150px;
+            margin-top: 50px;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: row;
+            justify-content:center;
+            align-items:end;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="profile-picture">
+            <input type="file" id="image" name="id_image" accept="image/*" required>
+        </div>
+        <div class="profile-name">
+            <input type="text" name="firstname" id="id_firstname" value="" placeholder="First Name">
+        </div>
+        <div class="profile-name">
+            <input type="text" name="lastname" id="id_lastname" value="" placeholder="Last Name">
+        </div>
+        <div class="profile-email">
+            <input type="email" name="email" id="id_email" value="" placeholder="E-Mail">
+        </div>
+        <div class="profile-mobile">
+            <input type="tel" name="mobile" id="id_mobile" value="" placeholder="Mobile">
+        </div>
+        <div class="profile-username">
+            <input type="text" name="username" id="id_username" value="rahuk123" readonly>
+        </div>
+
+    </div>
+</body>
+</html>

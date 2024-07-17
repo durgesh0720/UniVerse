@@ -114,14 +114,12 @@
     <div id="slogan">
         <h2>We serve the <span>Students.</span></h2>
     </div>
-    {% block auth %}
     <div id="main-container">
         <h2 id="text-h1">Enter in the UniVerse</h2>
         <button><a href="{%url 'login'%}">Login</a></button>
         <h2 id="or">OR</h2>
         <button><a href="{%url 'signup'%}">Signup</a></button>
     </div>
-    {% endblock %}
     <!-- <script>
         function openPageLogin() {
             window.location.href = 'login.html';
