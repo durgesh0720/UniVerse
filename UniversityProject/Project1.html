@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <style>
+        #para1
+        {   
+            text-align: center;
+            margin: auto;
+            font-size: 400%;
+            margin-bottom: 0px;
+            padding: 10px;
+            justify-content: center;
+            overflow-x: auto;
+        }
+        #img1
+        {
+            width: 20%;
+            display: block;
+            margin: auto;
+            border:5px solid black;
+            border-radius: 500px;
+            /* justify-content: center; */
+            /* overflow: auto; */
+        }
+        #div1
+        {
+            width: 90%px;
+            margin-left: 15%;
+        }
+        .input1
+        {
+            padding: 5px;
+            width: 80%;
+            font-size: 25px;
+            background-color:#3D52A0;
+            border: 5px solid black;
+        }
+        #childDiv
+        {
+            margin: auto;
+        }
+        .label1
+        {
+            margin-top: 0px;
+            font-size: 40px;
+            padding: 10px;
+        }
+        body
+        {
+            background-color:#ADBBDA;
+        }
+        #update1
+        {
+            min-width: 20%;
+            margin-top: 20px; 
+            font-size: 200%;
+            background-color: #3D52A0;
+            color: white;
+            margin-left: 30%;
+            border:5px solid black;
+            border-radius: 15px;
+        }
+    </style>
+</head>
+<body>    
+    <p id="para1">Welcome Your Profile</p>
+    <img id="img1" src="manicon.jpg" alt="Loading...">
+    <div id="div1">
+    <div id="childDiv">
+        <form action="something.py">
+            <label for="" class="label1">Name:</label>
+            <br><input type="text" class="input1" required>
+            <br><label for="" class="label1">Contact No:</label>
+            <br><input type="number" class="input1" required>
+            <br><label for="" class="label1">Email:</label>
+            <br><input type="text" class="input1" required>
+            <br><label for="" class="label1">Year:</label>
+            <br><input type="number" class="input1" required>
+            <br><label for="" class="label1">Roll no:</label>
+            <br><input type="text" class="input1" required>
+            <br><label for="" class="label1">Enrollment No:</label>
+            <br><input type="number" class="input1">
+            <br><input type="submit" value="Update" id="update1">
+        </form>
+    </div>
+    </div>
+</body>
+</html>
