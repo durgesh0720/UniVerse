@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deshboard</title>
+    <style>
+        #div1
+        {
+            border: 5px solid black;
+            text-align: center;
+            font-size: 350%;
+            padding: 1%;
+            border-radius: 20px;
+            background-color: #FF70B1;
+            overflow: auto;
+        }
+        #div2
+        {
+            height: 500px;
+            margin-top: 1.5%;
+            border-radius: 20px;
+            background-color: #3DEEC3;
+            text-align: center;
+            font-size: 300%;
+            padding: 1%;
+            overflow: auto;
+            position:static;
+        }
+        #div2 table
+        {
+            margin: auto;
+        }
+        #table1:hover
+        {
+            background-color:#A7BEAE;
+        }
+        #div3
+        {
+            border: 5px solid black;
+            margin-top: 1.5%;
+            border-radius: 50px;
+            background-color:#FFA533;
+            text-align: center;
+            font-size: 300%;
+            padding: 2%;
+            overflow: auto;
+        }    
+        #div4
+        {
+            margin-top: 1.5%;
+            width: 91%;
+            margin-right: 10%;
+            margin-left: 4%;
+            background-color:#F7CAC9;   
+            font-size: 300%;
+            text-align: center;
+            overflow-x: auto;
+        }
+        #div4 table
+        {
+            width: 100%;
+            text-align: center;
+            margin: auto;
+            margin-bottom: 1%;
+        }
+        #div5
+        {
+            border: 5px solid black;
+            margin-top: 1.5%;
+            border-radius: 50px;
+            width: 90%;
+            margin-left: 3%;
+            background-color: yellow;
+            font-size: 300%;
+            text-align: center;
+            padding: 1.5%;
+            overflow: auto;
+        }
+        #div6
+        {
+            border: 5px solid black;
+            margin-top: 1.5%;
+            height: 500px;
+            border-radius: 20px;
+            width:85%;
+            margin-left: 6%;
+            background-color: yellowgreen;
+            padding: 2%;
+            overflow: auto;
+        }
+        #div7
+        {
+            border: 3px solid black;
+            padding: 0.5%;
+            margin-top: 1.5%;
+            font-size: 200%;
+            background-color:#FF420E;
+            width: 99%;
+            min-height: auto;
+            overflow-x:auto;
+            /* float:none; */
+        }
+        #div8
+        {
+            margin-top: 1.5%;
+            border:2px solid black;
+            display:flex;
+            overflow: auto;
+            background-color: violet;
+            /* padding: 0%; */
+        }
+        .News
+        {
+            font-size: 300%;
+            padding: 2%;
+            margin: auto;
+        }
+        #Upcomming
+        {
+            text-align: center;
+            font-size: 240%;
+        }
+        .Anchor
+        {
+            text-decoration: none;
+            /* background-color: #3DEEC3; */
+            color: black;
+            border-color: black;
+            padding: 2%;
+        }
+        .Anchor:hover
+        {
+            background-color: #2C5F2D;
+        }
+        #options1
+        {
+            height: 25%;
+            background-color: aquamarine;
+            font-size: 65%;
+            width: 60%;
+        }
+        #collegesSelect
+        {
+            height: 25px;
+            background-color: aquamarine;
+            font-size: 65%;
+            width: 60%;
+        }
+        #RoomNo
+        {
+            height: 25px;
+            font-size: 65%;
+            width: 60%;
+            background-color: aquamarine;
+        }
+        #Section1
+        {
+            height: 25px;
+            font-size: 65%;
+            width: 60%;
+            background-color: aquamarine;
+        }
+        #Grades
+        {
+            border: 2px solid black;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            padding: 2%;
+            font-size: 200%;
+        }
+        body
+        {
+            padding: 20px;
+            background-color: #1995AD;
+        }
+    </style>
+</head>
+<body>
+    <div id="div1">
+        <b>Students Deshboard</b>
+    </div>
+    <div id="div8">
+        <p id="Upcomming"><b>Upcomming News</b></p>
+        <div class="News">
+            <a class="Anchor" href="Something.py" target="_blank">Quizes</a>
+        </div>
+        <div class="News">
+            <a class="Anchor" href="Something.py">ExamDates</a>
+        </div>
+        <div class="News">
+            <a class="Anchor" href="Something.py">FeeStatus</a>
+        </div>
+        <div class="News">
+            <a class="Anchor" href="Something.py">Events</a>
+        </div>
+    </div>
+    <div id="div7">
+        <b id="Acedemic">Acedemic Info</b>
+        <hr>
+        <div id="Colleges1">
+            <label for="Colleges">Colleges:</label><br>
+            <select name="" id="collegesSelect">
+                <option value="1">NGI (MEERUT)</option>
+                <option value="2">IIMT (MEERUT)</option>
+                <option value="3">Vinayak Vidhyapeeth</option>
+                <option value="4">BIT</option>
+                <option value="5">NIT Tirchy</option>
+                <option value="6">Delhi University</option>
+                <option value="">Amity University</option>
+                <option value="">CCSU University</option>
+                <option value="">Shobhit University</option>
+                <option value="">ANS College</option>
+            </select>
+        </div>
+    <div id="childDivof7">
+        <label for="Select" id="label7">Courses:</label><br>
+        <select name="" id="options1">
+            <option value="1">BCA</option>
+            <option value="2">BBA</option>
+            <option value="3">B-Tech</option>
+            <option value="4">BSC</option>
+            <option value="5">BA</option>
+            <option value="6">MCA</option>
+            <option value="7">BABed</option>
+            <option value="8">D-Pharma</option>
+            <option value="9">B-Pharma</option>
+            <option value="10">Polotechnique</option>
+            <option value="11">BSC (honur)</option>
+            <option value="12">MBA</option>
+            <option value="13">CA</option>
+            <option value="14">BPS</option>
+            <option value="15">M-Tech</option>
+            <option value="16">ABC</option>
+            <option value="17">CBA</option>
+            <option value="18">DEA</option>
+            <option value="19">ADE</option>
+            <option value="20">Defence</option>
+            <option value="21">Civil-Engineering</option>
+            <option value="22">NAM</option>
+            <option value="23">ANO</option>
+            <option value="24">CEO</option>
+            <option value="25">AA</option>
+            <option value="26">POI</option>
+            <option value="27">XYZ</option>
+            <option value="28">ZYX</option>
+            <option value="29">CDA</option>
+            <option value="30">ADC</option>
+        </select>
+    </div>
+    <div id="RoomNo.">
+        <label for="RoomNo">Room No:</label><br>
+        <select name="Room" id="RoomNo">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+            <option value="13">13</option>
+            <option value="14">14</option>
+            <option value="15">15</option>
+            <option value="16">16</option>
+            <option value="17">17</option>
+            <option value="18">18</option>
+            <option value="19">19</option>
+            <option value="20">20</option>
+        </select>
+    </div>
+    <div id="Section">
+        <label for="Section">Section:</label><br>
+            <select name="Section" id="Section1">
+                <option value="1">Sec A</option>
+                <option value="2">Sec B</option>
+                <option value="3">Sec C</option>
+                <option value="4">Sec D</option>
+                <option value="5">Sec E</option>
+            </select>
+    </div>
+    </div>
+    <div id="div2">
+        <b>Your Attendance Chart</b>
+        <table id="table1" border="2">
+            <thead>
+                <tr>
+                    <th>Lectures No.</th>
+                    <th>Hindi</th>
+                    <th>English</th>
+                    <th>Physics</th>
+                    <th>Chemistery</th>
+                    <th>Mathematics</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>4</td>
+                    <td>5</td>
+                    <td>6</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>5</td>
+                    <td>6</td>
+                    <td>8</td>
+                    <td>2</td>
+                    <td>1</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>2</td>
+                    <td>1</td>
+                    <td>4</td>
+                    <td>5</td>
+                    <td>6</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>3</td>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>0</td>
+                    <td>5</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>2</td>
+                    <td>1</td>
+                    <td>5</td>
+                    <td>3</td>
+                    <td>4</td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>2</td>
+                    <td>4</td>
+                    <td>3</td>
+                    <td>5</td>
+                    <td>1</td>
+                </tr>
+            </tbody>
+            <tfoot>
+
+            </tfoot>
+        </table>
+    </div>
+    <div id="div3">
+        <strong>Assignment Submissions Status</strong>
+    </div>
+    <div id="div4">
+       <table>
+        <thead>
+            <tr>
+                <th>Subjects</th>
+                <th>Submitted</th>
+                <th>Panding</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1. Subject</td>
+                <td>8</td>
+                <td>2</td>
+            </tr>
+            <tr>
+                <td>2. Subject</td>
+                <td>5</td>
+                <td>5</td>
+            </tr>
+            <tr>
+                <td>3. Subject</td>
+                <td>6</td>
+                <td>4</td>
+            </tr>
+            <tr>
+                <td>4. Subject</td>
+                <td>3</td>
+                <td>7</td>
+            </tr>
+            <tr>
+                <td>5. Subject</td>
+                <td>4</td>
+                <td>6</td>
+            </tr>
+            <tr>
+                <td>6. Subject</td>
+                <td>5</td>
+                <td>2</td>
+            </tr>
+       </table>
+    </div>
+    <div id="div5">
+        <strong>Grades And Performance</strong>
+    </div>
+    <div id="div6">
+        <table id="Grades" border="2">
+            <thead>
+                <tr>
+                    <th>Obtained Marks</th>
+                    <th>Letter Grade</th>
+                    <th>Grades Point</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>80 and Above</td>
+                    <td>O</td>
+                    <td>10</td>
+                </tr>
+                <tr>
+                    <td>70-79</td>
+                    <td>A</td>
+                    <td>9</td>
+                </tr>
+                <tr>
+                    <td>60-69</td>
+                    <td>B</td>
+                    <td>8</td>
+                </tr>
+                <tr>
+                    <td>55-59</td>
+                    <td>C</td>
+                    <td>7</td>
+                </tr>
+                <tr>
+                    <td>50-54</td>
+                    <td>D</td>
+                    <td>6</td>
+                </tr>
+                <tr>
+                    <td>40-49</td>
+                    <td>E</td>
+                    <td>5</td>
+                </tr>
+                <tr>
+                    <td><40</td>
+                    <td>F</td>
+                    <td>0</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
