@@ -3,130 +3,305 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>univers-website</title>
-    <!-- <link rel="stylesheet" href="home_style.css"> -->
-    <style>    
-        *{
+    <title>University Website</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
             margin: 0;
             padding: 0;
-            font-family: 'poppins', sans-serif;
+            font-family: 'Poppins', sans-serif;
             box-sizing: border-box;
         }
-        body{
-            background-color: #6E6E6E;
-            color: white;
-        }
-        nav{
-            display: flex;
-            align-items: flex-end;
-            justify-content: flex-end;
-            flex-wrap: wrap;
-            margin-right: 5%;
-        }
-        nav ul li{
-            display: inline-block;
-            list-style: none;
-            margin: 10px 10px;
-            font-size: 20px;
-        }
-        nav ul li a{
-            color: #fff;
-            text-decoration: none;
+        body {
+            margin: auto;
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            overflow: auto;
+            background: linear-gradient(315deg, rgba(101,0,94,1) 3%, rgba(60,132,206,1) 38%, rgba(48,238,226,1) 68%, rgba(255,25,25,1) 98%);
+            animation: gradient 15s ease infinite;
+            background-size: 400% 400%;
+            background-attachment: fixed;
             position: relative;
         }
-        nav ul li button{
+        @keyframes gradient {
+            0% {
+                background-position: 0% 0%;
+            }
+            50% {
+                background-position: 100% 100%;
+            }
+            100% {
+                background-position: 0% 0%;
+            }
+        }
+        .wave {
+            background: rgba(255, 255, 255, 0.25);
+            border-radius: 1000% 1000% 0 0;
+            position: fixed;
+            width: 200%;
+            height: 12em;
+            animation: wave 10s -3s linear infinite;
+            transform: translate3d(0, 0, 0);
+            opacity: 0.8;
+            bottom: 0;
+            left: 0;
+            z-index: -1;
+        }
+        .wave:nth-of-type(2) {
+            bottom: -1.25em;
+            animation: wave 18s linear reverse infinite;
+            opacity: 0.8;
+        }
+        .wave:nth-of-type(3) {
+            bottom: -2.5em;
+            animation: wave 20s -1s reverse infinite;
+            opacity: 0.9;
+        }
+        @keyframes wave {
+            2% {
+                transform: translateX(1);
+            }
+            25% {
+                transform: translateX(-25%);
+            }
+            50% {
+                transform: translateX(-50%);
+            }
+            75% {
+                transform: translateX(-25%);
+            }
+            100% {
+                transform: translateX(1);
+            }
+        }
+        nav {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            background-color: rgba(0, 51, 102, 0.382);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 0px 0;
+        }
+        .logo {
+            color: #F8C471;
+            font-size: 1.8em;
+            font-weight: bolder;
+        }
+        nav ul {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: nowrap;
+        }
+        nav ul li {
+            margin: 0 10px;
+        }
+        nav ul li a, nav ul li button {
+            color: #F8C471;
+            text-decoration: none;
+            font-size: 14px;
+            padding: 8px 16px;
+            border-radius: 5px;
+            background-color: #003366;
             border: none;
-            border-radius: 3px;
-            padding: 6px;
-            background-color: #BCFD4C;
-            color: #FF6A3D;
+            transition: background-color 0.3s, color 0.3s;
         }
-        
-        #slogan h2 span{
-            color: #BCFD4C;
-            font-size: larger;
+        nav ul li a:hover, nav ul li button:hover {
+            background-color: #F8C471;
+            color: #003366;
         }
-        #slogan h2{
-            margin: 20px 15px;
+        #slogan {
+            text-align: center;
+            color: #F8C471;
+            padding: 10px;
+        }
+        #slogan h2 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+        #slogan h2 span {
+            color: #F8C471;
         }
         #main-container {
             display: flex;
-            flex-direction:column;
-            background-color: #fff;
-            color: black;
+            flex-direction: column;
+            background-color: rgba(255, 255, 255, 0.495);
+            color: #333;
             padding: 20px;
-            border: 2px solid black;
             border-radius: 10px;
-            width: 95%;
+            width: 90%;
             max-width: 500px;
-            height: auto;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            margin: 20px auto; /* Centers the container horizontally */
-    
+            margin: 30px auto;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
         }
-            
-            #text-h1 {
-                text-align: center;
-                margin-bottom: 10%;
+        #text-h1 {
+            margin-bottom: 20px;
+            font-size: 1.8em;
+            color: #003366;
+        }
+        #or {
+            margin: 20px 0;
+        }
+        button {
+            background-color: #003366;
+            color: white;
+            padding: 10px 20px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #002244;
+        }
+        button a {
+            text-decoration: none;
+            color: white;
+            display: block;
+            height: 100%;
+            width: 100%;
+            line-height: 30px;
+            text-align: center;
+        }
+        #quotes {
+            display: flex;
+            justify-content: space-between;
+            margin: 30px auto;
+            padding: 20px;
+            max-width: 90%;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        #quotes blockquote {
+            font-size: 1em;
+            color: #333;
+            margin: 0;
+            padding: 15px;
+            border-left: 5px solid #003366;
+            background-color: rgba(255, 255, 255, 0.514);
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            flex: 1;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        #quotes blockquote:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        #quotes footer {
+            margin-top: 10px;
+            font-style: italic;
+            color: #777;
+        }
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                align-items: center;
+                padding: 10px;
             }
-            
-            #or {
-                text-align: center;
-                margin: 10% 0;
+            nav ul {
+                flex-direction: column;
+                align-items: center;
             }
-            
-            button {
-                background-color: #4CAF50; /* Optional button color */
-                color: white;
-                padding: 10px 20px;
-                margin: 10px 0;
-                border: none;
-                border-radius: 5px;
-                cursor: pointer;
-            }    
-            button:hover {
-                background-color: #45a049;
+            nav ul li {
+                margin: 5px 0;
             }
-            #main-container button a{
-                width: 100%;
-                display: block;
-                height: 30px;
-                text-decoration: none;
+            .logo {
                 font-size: 1.5em;
-                color: white;
+                margin-bottom: 10px;
             }
+            #main-container {
+                width: 95%;
+                padding: 15px;
+            }
+            #text-h1 {
+                font-size: 1.5em;
+            }
+            #slogan h2 {
+                font-size: 1.8em;
+            }
+            #quotes {
+                flex-direction: column;
+                align-items: center;
+            }
+            #quotes blockquote {
+                width: 100%;
+                margin-bottom: 20px;
+                font-size: 0.9em;
+                padding: 10px;
+            }
+        }
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1.2em;
+            }
+            nav ul li {
+                margin: 5px;
+            }
+            nav ul li a, nav ul li button {
+                font-size: 12px;
+                padding: 6px 12px;
+            }
+            #slogan h2 {
+                font-size: 1.5em;
+            }
+            #main-container {
+                padding: 10px;
+            }
+            #text-h1 {
+                font-size: 1.2em;
+            }
+            button {
+                padding: 8px 16px;
+                font-size: 0.9em;
+            }
+            #quotes blockquote {
+                font-size: 0.8em;
+                padding: 8px;
+            }
+        }
     </style>
 </head>
 <body>
-    <div id="header">
-        <div class="container">
-            <nav>
-                
-                <ul>
-                    <li><a href="#"></a>Home</li>
-                    <li><a href="#"></a>Notice</li>
-                    <li><button type="submit"><a href="{%url 'login'%}">Login</a></button></li>
-                    <li><button type="submit"><a href="{%url 'signup'%}">Signup</a></button></li>
-                </ul>
-            </nav>
-        </div>
-    </div>
+    <div class="wave"></div>
+    <div class="wave"></div>
+    <div class="wave"></div>
+    <header>
+        <nav>
+            <div class="logo">UniVerse</div>
+            <ul>
+                <!-- <li><button type="button"><a href="{% url 'login' %}">Login</a></button></li>
+                <li><button type="button"><a href="{% url 'signup' %}">Signup</a></button></li> -->
+                <li><button type="button"><a href="{% url 'admin-home' %}">Admin Panel</a></button></li>
+            </ul>
+        </nav>
+    </header>
     <div id="slogan">
         <h2>We serve the <span>Students.</span></h2>
     </div>
-    <div id="main-container">
+    <main id="main-container">
         <h2 id="text-h1">Enter in the UniVerse</h2>
-        <button><a href="{%url 'login'%}">Login</a></button>
+        <button><a href="{% url 'login' %}">Login</a></button>
         <h2 id="or">OR</h2>
-        <button><a href="{%url 'signup'%}">Signup</a></button>
-    </div>
-    <!-- <script>
-        function openPageLogin() {
-            window.location.href = 'login.html';
-        }
-        function openPageSingup() {
-            window.location.href = 'signup.html';
-        }
-    </script> -->
+        <button><a href="{% url 'signup' %}">Signup</a></button>
+    </main>
+    <section id="quotes">
+        <blockquote>
+            "Education is the most powerful weapon which you can use to change the world."
+            <footer>- Nelson Mandela</footer>
+        </blockquote>
+        <blockquote>
+            "The beautiful thing about learning is that no one can take it away from you."
+            <footer>- B.B. King</footer>
+        </blockquote>
+    </section>
+    <script>
+        // Add any JavaScript interactivity here if needed
+    </script>
 </body>
 </html>

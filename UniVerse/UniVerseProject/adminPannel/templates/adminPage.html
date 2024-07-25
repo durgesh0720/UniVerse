@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f0f2f5;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            color: #007bff;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 18px;
+            color: #555;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .navbar button {
+            padding: 10px 20px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 0 5px;
+            transition: background-color 0.3s;
+        }
+
+        .navbar button:hover {
+            background-color: #0056b3;
+        }
+
+        .section {
+            margin-bottom: 20px;
+        }
+
+        .section-header {
+            font-size: 22px;
+            margin-bottom: 15px;
+            font-weight: bold;
+            color: #007bff;
+        }
+
+        .section-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .section-content button {
+            width: 180px;
+            height: 50px;
+            background-color: #28a745;
+            border: none;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        .section-content button a {
+            text-decoration: none;
+            color: white;
+            display: block;
+            height: 100%;
+            width: 100%;
+            line-height: 50px;
+        }
+
+        .section-content button:hover {
+            background-color: #218838;
+        }
+        .navbar a{
+            outline: none;
+            text-decoration: none;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Welcome, {{firstname}} {{lastname}}</h1>
+            <p>Manage and oversee the various aspects of the system from this dashboard.</p>
+        </div>
+        <div class="navbar">
+            <button>Profile</button>
+            <button><a href="{% url 'sign-out' %}">Sign Out</a></button>
+        </div>
+        <div class="section">
+            <div class="section-header">Management</div>
+            <div class="section-content">
+                <button><a href="#">Quiz Manager</a></button>
+                <button><a href="#">Assignments Manager</a></button>
+                <button><a href="#">Attendance Manager</a></button>
+                <button><a href="#">Classes Manager</a></button>
+                <button><a href="#">Announcements</a></button>
+                <button><a href="#">Students Manager</a></button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

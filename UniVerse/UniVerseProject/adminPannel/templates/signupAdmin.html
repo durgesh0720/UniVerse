@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Signup</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            color: #343a40;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .admin-container {
+            background-color: #ffffff;
+            padding: 10px 40px 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 400px;
+            /* text-align: center; */
+        }
+        .admin-container h2 {
+            margin-bottom: 20px;
+            color: #007bff;
+            text-align: center;
+        }
+        .admin-container form {
+            display: flex;
+            flex-direction: column;
+        }
+        .admin-container label {
+            text-align: left;
+            margin-bottom: 5px;
+            font-weight: bold;
+            margin-top: 5px;
+        }
+        .admin-container input {
+            padding: 10px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            font-size: 14px;
+            width: 100%;
+        }
+        .admin-container input:focus {
+            border-color: #80bdff;
+            outline: none;
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+        }
+        .admin-container button {
+            padding: 12px 20px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+            width: 100%;
+        }
+        .admin-container button:hover {
+            background-color: #0056b3;
+        }
+        .admin-container .form-group {
+            margin-bottom: 10px;
+        }
+        .admin-container .form-text {
+            text-align: left;
+            color: #6c757d;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <h2>Admin Signup</h2>
+        <form action="{% url 'save-admin' %}" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="first_name">First Name:</label>
+                <input type="text" name="firstname" id="first_name" placeholder="Enter your first name" required>
+            </div>
+            <div class="form-group">
+                <label for="last_name">Last Name:</label>
+                <input type="text" name="lastname" id="last_name" placeholder="Enter your last name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" name="email" id="email" placeholder="xyz123@gmail.com" required>
+                <small class="form-text">We'll never share your email with anyone else.</small>
+            </div>
+            <div class="form-group">
+                <label for="mobile">Mobile:</label>
+                <input type="tel" name="mobile" id="mobile" placeholder="Ex: +91 9100000123" required>
+            </div>
+            <div class="form-group">
+                <label for="id_number">ID Number:</label>
+                <input type="number" name="id_number" id="id_number" placeholder="Ex: 123456789" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Create Password:</label>
+                <input type="password" name="password" id="password" placeholder="Enter a strong password" required>
+            </div>
+            <div class="form-group">
+                <label for="re_enter_password">Re-Enter Password:</label>
+                <input type="password" name="re_enter_password" id="re_enter_password" placeholder="Re-enter your password" required>
+            </div>
+            <button type="submit">Signup</button>
+        </form>
+    </div>
+</body>
+</html>

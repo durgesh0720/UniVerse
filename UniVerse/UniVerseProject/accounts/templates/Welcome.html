@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome</title>
+    <title>{{firstname}} {{lastname}}</title>
     <style>
         *{
             margin: 0;
@@ -75,6 +75,9 @@
             display: block;
             text-align: center;
         }
+        a{
+            text-decoration: none;
+        }
     </style>
 </head>
 <body>
@@ -84,10 +87,11 @@
         </div>
         <div class="navbar">
             <nav>
-                <button>Class Status</button>
-                <button>Dashboard</button>
-                <button>Profile</button>
-                <button>Masseges</button>
+                <button><a href="#">Class Status</a></button>
+                <button><a href="#">Dashboard</a></button>
+                <button><a href="{% url 'profile' %}?username={{ username }}">Profile</a></button>
+                <button><a href="#">Massages</a></button>
+                <button><a href="{% url 'logout' %}">Log out</a></button>
             </nav>
         </div>
         <div class="main-head">

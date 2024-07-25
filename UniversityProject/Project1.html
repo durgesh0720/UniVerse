@@ -3,89 +3,155 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile</title>
+    <title>Profile | Name</title>
     <style>
-        #para1
-        {   
-            text-align: center;
-            margin: auto;
-            font-size: 400%;
-            margin-bottom: 0px;
-            padding: 10px;
+        body {
+            background-color: #ffffff;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            display: flex;
             justify-content: center;
-            overflow-x: auto;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
         }
-        #img1
-        {
-            width: 20%;
-            display: block;
-            margin: auto;
-            border:5px solid black;
-            border-radius: 500px;
-            /* justify-content: center; */
-            /* overflow: auto; */
-        }
-        #div1
-        {
-            width: 90%px;
-            margin-left: 15%;
-        }
-        .input1
-        {
-            padding: 5px;
+        #container {
+            text-align: center;
             width: 80%;
-            font-size: 25px;
-            background-color:#3D52A0;
-            border: 5px solid black;
-        }
-        #childDiv
-        {
+            max-width: 600px;
             margin: auto;
         }
-        .label1
-        {
-            margin-top: 0px;
-            font-size: 40px;
+        #para1 {   
+            font-size: 2em;
             padding: 10px;
         }
-        body
-        {
-            background-color:#ADBBDA;
-        }
-        #update1
-        {
-            min-width: 20%;
-            margin-top: 20px; 
-            font-size: 200%;
-            background-color: #3D52A0;
+        .profile-placeholder, #profileImage {
+            width: 150px;
+            height: 150px;
+            display: block;
+            margin: 20px auto;
+            border: 2px solid black;
+            border-radius: 50%;
+            object-fit: cover;
+            background-color: #007bff;
             color: white;
-            margin-left: 30%;
-            border:5px solid black;
-            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+            text-transform: uppercase;
+        }
+        #profileImage {
+            display: none;
+        }
+        .input1 {
+            padding: 5px;
+            width: calc(100% - 20px);
+            font-size: 25px;
+            background-color: #fdffcd;
+            border: 2px solid black;
+            margin: 10px 0;
+        }
+        .label1 {
+            font-size: 1.2em;
+            padding: 10px;
+            display: block;
+            text-align: left;
+            margin-left: 0;
+        }
+        #update1 {
+            min-width: 20%;
+            margin-top: 30px; 
+            font-size: 1.4em;
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 5px;
+            cursor: pointer;
+            padding: 10px;
+            display: block;
+            margin: 30px auto;
+        }
+        #label {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-top: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #fileInput {
+            display: none;
         }
     </style>
 </head>
 <body>    
-    <p id="para1">Welcome Your Profile</p>
-    <img id="img1" src="manicon.jpg" alt="Loading...">
-    <div id="div1">
-    <div id="childDiv">
-        <form action="something.py">
-            <label for="" class="label1">Name:</label>
-            <br><input type="text" class="input1" required>
-            <br><label for="" class="label1">Contact No:</label>
-            <br><input type="number" class="input1" required>
-            <br><label for="" class="label1">Email:</label>
-            <br><input type="text" class="input1" required>
-            <br><label for="" class="label1">Year:</label>
-            <br><input type="number" class="input1" required>
-            <br><label for="" class="label1">Roll no:</label>
-            <br><input type="text" class="input1" required>
-            <br><label for="" class="label1">Enrollment No:</label>
-            <br><input type="number" class="input1">
-            <br><input type="submit" value="Update" id="update1">
+    <div id="container">
+        <p id="para1">Welcome Name</p>
+        <div id="profilePlaceholder" class="profile-placeholder">FN</div>
+        <img id="profileImage" src="manicon.jpg" alt="Profile Picture">
+        <form>
+            <input type="file" id="fileInput" accept="image/*" name="image" value="">
+            <label for="fileInput" id="label">Choose a picture</label>
+
+            <label for="firstname" class="label1">Firstname:</label>
+            <input type="text" class="input1" name="firstname" id="firstname" required>
+
+            <label for="lastname" class="label1">Lastname:</label>
+            <input type="text" class="input1" name="lastname" id="lastname" required>
+
+            <label for="mobile" class="label1">Contact No:</label>
+            <input type="number" class="input1" name="mobile" required>
+
+            <label for="email" class="label1">Email:</label>
+            <input type="text" class="input1" name="email" required>
+
+            <label for="year" class="label1">Year:</label>
+            <input type="number" class="input1" name="year" readonly>
+
+            <label for="roll_no" class="label1">Roll No:</label>
+            <input type="text" class="input1" name="roll_no" readonly>
+
+            <label for="enrollment_no" class="label1">Enrollment No:</label>
+            <input type="number" class="input1" name="enrollment_no" readonly>
+
+            <label for="username" class="label1">Username:</label>
+            <input type="text" class="input1" name="username" readonly>
+
+            <input type="button" value="Update" id="update1">
         </form>
     </div>
-    </div>
+    <script>
+        const fileInput = document.getElementById('fileInput');
+        const profileImage = document.getElementById('profileImage');
+        const profilePlaceholder = document.getElementById('profilePlaceholder');
+        const firstnameInput = document.getElementById('firstname');
+        const lastnameInput = document.getElementById('lastname');
+
+        fileInput.addEventListener('change', (event) => {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    profileImage.src = e.target.result;
+                    profileImage.style.display = 'block';
+                    profilePlaceholder.style.display = 'none';
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+
+        function updateProfilePlaceholder() {
+            const firstname = firstnameInput.value;
+            const lastname = lastnameInput.value;
+            if (firstname && lastname) {
+                profilePlaceholder.textContent = `${firstname[0]}${lastname[0]}`.toUpperCase();
+            } else {
+                profilePlaceholder.textContent = 'FN';
+            }
+        }
+
+        firstnameInput.addEventListener('input', updateProfilePlaceholder);
+        lastnameInput.addEventListener('input', updateProfilePlaceholder);
+    </script>
 </body>
 </html>
