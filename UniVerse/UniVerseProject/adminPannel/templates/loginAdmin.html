@@ -70,11 +70,24 @@
             font-size: 14px;
             color: #777;
         }
+        .error{
+            color: red;
+            padding: 5px;
+            margin:10px;
+            font-weight: bold;
+        }
+        a{
+            text-decoration: none;
+            color: white;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Admin Login</h1>
+        <div class="error">
+            {{errmsg}}
+        </div>
         <form class="login-form" action="{% url 'admin-login' %}" method="POST">
             {% csrf_token %}
             <label for="id_number">ID Number:</label>
@@ -84,6 +97,7 @@
             <input type="password" name="password" id="password" placeholder="Enter your password" required>
 
             <button type="submit">Login</button>
+            <button> <a href="{% url 'admin-home' %}">Back to Admin Home</a></button>
         </form>
         <div class="footer">
             &copy; 2024 Admin Portal. All rights reserved.

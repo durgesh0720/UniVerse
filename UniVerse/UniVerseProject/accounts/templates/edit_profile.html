@@ -1,0 +1,234 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile | {{ user.username }}</title>
+    <style>
+        body {
+            background-color: #f4f4f9;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 20px;
+            margin: 0;
+            height: 100vh;
+        }
+        #container {
+            width: 100%;
+            max-width: 800px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+        #profile-header {
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+        }
+        #profileImage {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #007bff;
+            margin-right: 20px;
+        }
+        #profile-details {
+            flex: 1;
+        }
+        #profile-details h2 {
+            margin: 0;
+            font-size: 2em;
+            color: #333;
+        }
+        #profile-details p {
+            color: #666;
+            margin: 5px 0;
+        }
+        #form-section {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .form-group {
+            flex: 1 1 45%;
+            margin: 10px;
+        }
+        .form-group label {
+            display: block;
+            font-size: 1.1em;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        .form-group input, .form-group select, .form-group textarea {
+            width: 90%;
+            padding: 10px;
+            font-size: 1em;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            background-color: #f9f9f9;
+        }
+        .form-group textarea {
+            resize: vertical;
+            resize: none;
+        }
+        #update-btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background-color: #007bff;
+            color: #fff;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        #fileInput {
+            display: none;
+        }
+        #label {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .error {
+            color: red;
+            text-align: center;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div id="profile-header">
+            {% if student.profile_picture %}
+                <img id="profileImage" src="{{ student.profile_picture.url }}" alt="Profile Picture">
+            {% else %}
+                <img id="profileImage" src="{% static 'path/to/default/profile/picture.png' %}" alt="Profile Picture">
+            {% endif %}
+            <div id="profile-details">
+                <h2>{{ user.first_name }} {{ user.last_name }}</h2>
+                <p>{{ user.email }}</p>
+                <label for="fileInput" id="label">Change Picture</label>
+                <input type="file" id="fileInput" accept="image/*" name="profile_picture">
+            </div>
+        </div>
+        <form action="{% url 'update-profile' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div id="form-section">
+                <div class="form-group">
+                    <label for="firstname">First Name:</label>
+                    <input type="text" name="firstname" id="firstname" value="{{ user.first_name }}">
+                </div>
+                <div class="form-group">
+                    <label for="lastname">Last Name:</label>
+                    <input type="text" name="lastname" id="lastname" value="{{ user.last_name }}">
+                </div>
+                <div class="form-group">
+                    <label for="username">Username:</label>
+                    <input type="text" name="username" id="username" value="{{ user.username }}" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="mobile">Contact No:</label>
+                    <input type="text" name="mobile" id="mobile" value="{{ student.mobile }}">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="text" name="email" id="email" value="{{ user.email }}">
+                </div>
+                <div class="form-group">
+                    <label for="date_of_birth">Date of Birth:</label>
+                    <input type="date" id="date_of_birth" name="dob" value="{{ student.dob|date:'Y-m-d' }}">
+                </div>
+                <div class="form-group">
+                    <label for="admission_year">Admission Year:</label>
+                    <input type="number" name="admission_year" id="admission_year" value="{{ student.admission_year }}">
+                </div>
+                <div class="form-group">
+                    <label for="rollnumber">Roll Number:</label>
+                    <input type="text" name="rollnumber" id="rollnumber" value="{{ student.rollnumber }}">
+                </div>
+                <div class="form-group">
+                    <label for="enrollment">Enrollment No:</label>
+                    <input type="text" name="enrollment" id="enrollment" value="{{ student.enrollment }}">
+                </div>
+                <div class="form-group">
+                    <label for="course">Course:</label>
+                    <select name="course" id="course">
+                        <option value="{{ student.course }}" selected>{{ student.course }}</option>
+                        <option value="BCA">BCA</option>
+                        <option value="BBA">BBA</option>
+                        <option value="Bsc CS">B.sc CS</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="profession">Profession:</label>
+                    <select name="profession" id="profession">
+                        <option value="{{ student.profession }}" selected>{{ student.profession }}</option>
+                        <option value="Computer Science Student">Computer Science Student</option>
+                        <option value="Software Engineer">Software Engineer</option>
+                        <option value="Data Scientist">Data Scientist</option>
+                        <option value="Cybersecurity Specialist">Cybersecurity Specialist</option>
+                        <option value="IT Support Specialist">IT Support Specialist</option>
+                        <option value="System Administrator">System Administrator</option>
+                        <option value="Web Developer">Web Developer</option>
+                        <option value="Teacher">Teacher</option>
+                        <option value="Professor">Professor</option>
+                        <option value="Researcher">Researcher</option>
+                    </select>
+                </div>
+                <div class="form-group" style="flex: 1 1 100%;">
+                    <label for="about">About:</label>
+                    <textarea name="bio" id="about" rows="4">{{ student.bio }}</textarea>
+                </div>
+                <div class="form-group" style="flex: 1 1 100%;">
+                    <label for="address">Address:</label>
+                    <textarea name="address" id="address" rows="4">{{ student.address }}</textarea>
+                </div>
+            </div>
+            <input type="submit" value="Update" id="update-btn">
+        </form>
+        <div class="error">
+            {{ errmsg }}
+        </div>
+    </div>
+    <script>
+        const fileInput = document.getElementById('fileInput');
+        const profileImage = document.getElementById('profileImage');
+        const firstnameInput = document.getElementById('firstname');
+        const lastnameInput = document.getElementById('lastname');
+
+        fileInput.addEventListener('change', (event) => {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    profileImage.src = e.target.result;
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+
+        function updateProfilePlaceholder() {
+            const firstname = firstnameInput.value;
+            const lastname = lastnameInput.value;
+            if (firstname && lastname) {
+                profilePlaceholder.textContent = `${firstname[0]}${lastname[0]}`.toUpperCase();
+            }
+        }
+
+        firstnameInput.addEventListener('input', updateProfilePlaceholder);
+        lastnameInput.addEventListener('input', updateProfilePlaceholder);
+    </script>
+</body>
+</html>

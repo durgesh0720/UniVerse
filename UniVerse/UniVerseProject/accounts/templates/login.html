@@ -75,6 +75,11 @@
         .signup{
             text-align: center;
         }
+        button a{
+            text-decoration: none;
+            color:  white;
+            font-weight: lighter;
+        }
     </style>
 </head>
 <body>
@@ -93,6 +98,7 @@
             <label for="show-password" class="show-password">Show Password</label> <br>
     
             <button type="submit">Login</button>
+            <button><a href="{% url 'home' %}">Back to Home</a></button>
         </form>
         
         <div id="error">

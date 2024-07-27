@@ -18,7 +18,7 @@
         }
         .admin-container {
             background-color: #ffffff;
-            padding: 10px 40px 20px;
+            padding: 0px 40px 10px;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             width: 400px;
@@ -67,18 +67,26 @@
             background-color: #0056b3;
         }
         .admin-container .form-group {
-            margin-bottom: 10px;
+            margin-bottom: 0px;
         }
         .admin-container .form-text {
             text-align: left;
             color: #6c757d;
             font-size: 12px;
         }
+        a{
+            text-decoration: none;
+            color: white;
+        }
     </style>
 </head>
 <body>
     <div class="admin-container">
+        <button> <a href="{% url 'admin-home' %}">Back to Admin Home</a></button>
         <h2>Admin Signup</h2>
+        <div class="error">
+            {{errmsg}}
+        </div>
         <form action="{% url 'save-admin' %}" method="POST">
             {% csrf_token %}
             <div class="form-group">

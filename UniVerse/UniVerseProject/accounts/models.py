@@ -8,6 +8,10 @@ class student_registration(models.Model):
     course=models.CharField(max_length=20,null=True)
     mobile=models.IntegerField(null=True)
     admission_year=models.IntegerField(null=True)
+    bio=models.TextField(max_length=255,null=True)
+    dob=models.DateField(null=True,blank=True,verbose_name="Date of Birth")
+    address=models.TextField(null=True,blank=True)
+    profession=models.CharField(max_length=20,null=True)
     profile_picture = models.ImageField(upload_to='profile_pictures/',null=True)
     
 

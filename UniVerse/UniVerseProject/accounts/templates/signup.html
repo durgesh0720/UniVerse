@@ -70,10 +70,15 @@
             color: red;
             margin-top: 10px;
         }
+        button a{
+            text-decoration: none;
+            color: white;
+        }
     </style>
 </head>
 <body>
     <div id="main-container">
+        <button><a href="{% url 'home' %}">Back to Home</a></button>
         <h1>Signup Here</h1>
         <form action="{% url 'save' %}" id="login-from" method="POST">
             {%csrf_token%}

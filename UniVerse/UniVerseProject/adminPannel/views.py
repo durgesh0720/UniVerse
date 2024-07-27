@@ -6,11 +6,17 @@ from django.shortcuts import redirect
 def homepage(request):
     return render(request,"homepage.html")
 
-def signup(request):
+def signupAdmin(request):
     return render(request,"signupAdmin.html")
 
 def loginAdmin(request):
-    return render(request,"loginAdmin.html")
+    d1={}
+    try:
+        if request.GET['error']==str(1):
+            d1['errmsg']='ID number is not correct'
+    except:
+        d1['errmsg']=''
+    return render(request,"loginAdmin.html",d1)
 
 def save_admin(request):
     if request.method=='POST':
@@ -50,7 +56,7 @@ def Admin_login(request):
         admin=admin_registration.objects.filter(id_number=id,password=password).first()
         
         if admin is None:
-            return redirect('loginAdmin')
+            return redirect('/admin-pannel/loginAdmin?error=1')
         else:
             context={
                 'firstname':admin.first_name,

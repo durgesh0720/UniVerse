@@ -5,80 +5,132 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome</title>
     <style>
-        *{
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
         }
-        body{
-            background-color: #FDDE55;
-            font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f0f0;
         }
-        .main-box{
+        .main-box {
             display: flex;
             flex-direction: column;
             justify-content: space-around;
             align-items: center;
             margin: 20px;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
         .head {
             margin-top: 20px;
             width: 100%;
             background-color: #03AED2;
-        }
-        .head header{
-            font-size: 200%;
+            padding: 20px;
             text-align: center;
-            color: white;
+            border-radius: 10px 10px 0 0;
         }
-        .navbar{
+        .head header {
+            font-size: 36px;
+            color: white;
+            font-weight: bold;
+            animation: fadeIn 2s;
+        }
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+        .navbar {
             margin-top: 20px;
             width: 100%;
             margin-bottom: 20px;
+            background-color: #f0f0f0;
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
         }
-        .navbar nav{
+        .navbar nav {
             display: flex;
             flex-direction: row;
             justify-content: space-around;
             align-items: center;
-            margin: 10px;
         }
-        .navbar nav button{
-            padding: 10px;
+        .navbar nav button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #03AED2;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.5s;
         }
-        .main-head{
+        .navbar nav button:hover {
+            background-color: #026d8d;
+        }
+        .main-head {
             background-color: #03AED2;
             width: 100%;
             margin-bottom: 20px;
             padding: 10px;
-        }
-        .main-head header{
-            color: white;
             text-align: center;
-            font-size: 1.2rem;
+            border-radius: 10px;
+        }
+        .main-head header {
+            color: white;
+            font-size: 24px;
             font-weight: bold;
         }
-        .Annoucements{
+        .Annoucements {
             width: 100%;
             background-color: #68D2E8;
             margin-bottom: 20px;
-            padding: 10px;
+            padding: 20px;
+            border-radius: 10px;
         }
-        .Annoucements header{
-            font-size: 1.1rem;
+        .Annoucements header {
+            font-size: 18px;
             text-align: center;
             font-weight: bold;
             margin-bottom: 10px;
         }
-        .Annoucements span{
+        .Annoucements span {
             display: block;
             text-align: center;
+            font-size: 16px;
+            color: #333;
+        }
+        /* Responsive design */
+        @media only screen and (max-width: 768px) {
+            .main-box {
+                margin: 10px;
+                padding: 10px;
+            }
+            .head {
+                padding: 10px;
+            }
+            .navbar nav button {
+                padding: 5px 10px;
+            }
+            .main-head {
+                padding: 5px;
+            }
+            .Annoucements {
+                padding: 10px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="main-box">
         <div class="head">
-            <Header>Welcome to Name</Header>
+            <header>Welcome to Name</header>
         </div>
         <div class="navbar">
             <nav>

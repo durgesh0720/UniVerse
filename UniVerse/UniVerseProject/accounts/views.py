@@ -2,9 +2,7 @@ from django.shortcuts import render
 from .models import student_registration
 from django.shortcuts import redirect,get_object_or_404
 from django.http import HttpResponse
-# from django.views.decorators.csrf import requires_csrf_token
 from django.views.decorators.csrf import csrf_protect, ensure_csrf_cookie
-from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
@@ -34,6 +32,7 @@ def log_in(request):
         d1['errmsg']=""
     return render(request,"login.html",d1)
 
+@login_required(login_url='login')
 @csrf_protect
 def saveUsers(request):
     try:
@@ -70,34 +69,53 @@ def saveUsers(request):
         logger.error(f"An error occurred: {e}")
         print(f"An error occurred: {e}")
         return redirect('home')
-    
 def checkUser(request):
     try:
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        
-        user = authenticate(username=username, password=password)
-        
-        if user is None:
-            return redirect('/login?error=1')
+        if request.method=='POST':
+            username = request.POST.get('username')
+            password = request.POST.get('password')
+            
+            user = authenticate(username=username, password=password)
+            
+            if user is None:
+                return redirect('/login?error=1')
+            else:
+                login(request, user)
+                context = {
+                    'firstname': user.first_name,
+                    'lastname': user.last_name,
+                    'username': user.username,
+                }
+                return render(request, "Welcome.html", context)
         else:
-            login(request, user)
-            context = {
-                'firstname': user.first_name,
-                'lastname': user.last_name,
-                'username': user.username,
-            }
-            return render(request, "Welcome.html", context)
+            return redirect('/login?error=1')
     except Exception as e:
         print(f"Error during authentication: {e}")
         return redirect('/login?error=1')
-
+@login_required(login_url='login')
 def profile(request):
+    try:
         username = request.GET['username']
         user = get_object_or_404(User, username=username)
         student = get_object_or_404(student_registration, user=user)
         return render(request, "profile.html", {"user": user, "student": student})
+    except:
+        print(request)
+        return redirect('login')
+    
+@login_required(login_url='login')
+def edit_profile(request):
+    try:
+        print(request)
+        username = request.GET['username']
+        user = get_object_or_404(User, username=username)
+        student = get_object_or_404(student_registration, user=user)
+        return render(request, "edit_profile.html", {"user": user, "student": student})
+    except Exception as e:
+        print(f"Exception: {e}")
+        return redirect('login')
 
+@login_required(login_url='login')
 def update_profile(request):
     if request.method == 'POST':
         try:
@@ -111,12 +129,16 @@ def update_profile(request):
             enrollment = request.POST['enrollment']
             profile_picture = request.FILES.get('profile_picture')
             course = request.POST.get('course')
+            address = request.POST['address']
+            bio = request.POST['bio']
+            profession = request.POST['profession']
+            dob=request.POST['dob']
 
             print("Received POST data:")
             print(f"username: {username}, firstname: {firstname}, lastname: {lastname}")
             print(f"mobile: {mobile}, email: {email}, admission_year: {admission_year}")
             print(f"rollnumber: {rollnumber}, enrollment: {enrollment}")
-            print(f"profile_picture: {profile_picture}, course: {course}")
+            # print(f"profile_picture: {profile_picture}, course: {course}")
 
             user = get_object_or_404(User, username=username)
             print(f"User found: {user}")
@@ -133,6 +155,10 @@ def update_profile(request):
             student.course = course
             student.mobile = mobile
             student.admission_year = admission_year
+            student.bio=bio
+            student.dob=dob
+            student.address=address
+            student.profession=profession
             if profile_picture:
                 student.profile_picture = profile_picture
             student.save()
@@ -143,8 +169,9 @@ def update_profile(request):
                 'username': user.username,
             }
             return render(request, "Welcome.html", context)
-        except KeyError:
-            return HttpResponse("Invalid form data")
+        except KeyError as e:
+            print(f"Invalid form data{e}")
+            return HttpResponse("Invalid form data=",e)
         except User.DoesNotExist:
             return HttpResponse("User not found")
         except student_registration.DoesNotExist:

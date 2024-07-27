@@ -157,7 +157,7 @@
             const firstname = firstnameInput.value;
             const lastname = lastnameInput.value;
             if (firstname && lastname) {
-                profilePlaceholder.textContent = '${firstname[0]}${lastname[0]}.toUpperCase()';
+                profilePlaceholder.textContent = `${firstname[0]}${lastname[0]}`.toUpperCase();
             } else {
                 profilePlaceholder.textContent = 'FN';
             }
