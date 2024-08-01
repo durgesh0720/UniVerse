@@ -74,11 +74,15 @@
             color: red;
             padding: 5px;
             margin:10px;
-            font-weight: bold;
+            font-weight:normal;
         }
         a{
             text-decoration: none;
             color: white;
+        }
+        #or{
+            margin: 0;
+            padding: 0;
         }
     </style>
 </head>
@@ -88,13 +92,18 @@
         <div class="error">
             {{errmsg}}
         </div>
-        <form class="login-form" action="{% url 'admin-login' %}" method="POST">
+        <form class="login-form" action="{% url 'admin-login' %}" method="POST" onsubmit="checkFields(event)">
             {% csrf_token %}
             <label for="id_number">ID Number:</label>
-            <input type="text" name="id_number" id="id_number" placeholder="Enter your ID number" required>
+            <input type="text" name="id_number" id="id_number" placeholder="Ex: 9900099009">
+
+            <span id="or">OR</span>
+
+            <label for="username">Username:</label>
+            <input type="text" name="username" id="username" placeholder="Ex: username072">
 
             <label for="password">Password:</label>
-            <input type="password" name="password" id="password" placeholder="Enter your password" required>
+            <input type="password" name="password" id="password" placeholder="Ex: username***" required>
 
             <button type="submit">Login</button>
             <button> <a href="{% url 'admin-home' %}">Back to Admin Home</a></button>
@@ -103,5 +112,16 @@
             &copy; 2024 Admin Portal. All rights reserved.
         </div>
     </div>
+    <script>
+        function checkFields(event) {
+            var id_number = document.getElementById('id_number').value.trim();
+            var username = document.getElementById('username').value.trim();
+            var error = document.getElementsByClassName('error')[0]
+            if (id_number === "" && username === "") {
+                error.innerHTML="Please input either ID number or username."
+                event.preventDefault();
+            }
+        }
+    </script>
 </body>
 </html>

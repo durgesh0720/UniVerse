@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'accounts',
     'adminPannel',
+    'assignments_manager',
 ]
 
 MIDDLEWARE = [
