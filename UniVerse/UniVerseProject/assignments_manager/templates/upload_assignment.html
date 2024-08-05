@@ -122,7 +122,7 @@
             border-top: 1px solid #ddd;
             padding-top: 10px;
             display: flex;
-            justify-content:space-evenly;
+            justify-content: space-evenly;
         }
 
         .modal-footer button {
@@ -238,11 +238,7 @@
 <body>
     <div class="container">
         <h1>Assignment Manager</h1>
-
-        <!-- Button to Open the Modal -->
         <button class="upload-button" id="openModal">Upload New Assignment</button>
-
-        <!-- Assignments Table -->
         <table>
             <thead>
                 <tr>
@@ -258,35 +254,40 @@
                 </tr>
             </thead>
             <tbody>
-                <!-- Example Row, replace with dynamic content -->
-                <tr>
-                    <td data-label="Assignment Number">001</td>
-                    <td data-label="Title">Introduction to Python</td>
-                    <td data-label="Class">CS101</td>
-                    <td data-label="Posting Date">2024-07-01</td>
-                    <td data-label="Submission Date">2024-07-15</td>
-                    <td data-label="Questions">Explain basic concepts and provide examples.</td>
-                    <td data-label="Submitted By">John Doe</td>
-                    <td data-label="Unit Number">Unit 1</td>
-                    <td class="actions">
-                        <button><a href="#" class="edit">Edit</a></button>
-                        <button class="delete">Delete</button>
-                    </td>
-                </tr>
-                <!-- Add additional rows here -->
+                {% if assignments %}
+                    {% for assignment in assignments %}
+                        <tr>
+                            <td data-label="Assignment Number">{{ assignment.assignment_number }}</td>
+                            <td data-label="Title">{{ assignment.unit_title }}</td>
+                            <td data-label="Class">{{ assignment.className }}</td>
+                            <td data-label="Posting Date">{{ assignment.created_date }}</td>
+                            <td data-label="Submission">{{ assignment.due_date }}</td>
+                            <td data-label="Questions">{{ assignment.questions }}</td>
+                            <td data-label="Submitted By">{{ assignment.submit_by }}</td>
+                            <td data-label="Unit Number">{{ assignment.unit_number }}</td>
+                            <td class="actions">
+                            <button class="edit"><a href="{% url 'editAssignment' %}?id={{assignment.id}}">Edit</a></button>
+                            <button class="delete"><a href="{% url 'deleteAssignment' %}?id={{assignment.id}}">Delete</a></button>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td colspan="9">No Assignments</td>
+                    </tr>
+                {% endif %}
             </tbody>
         </table>
-
-        <!-- Modal for Assignment Upload -->
         <div id="assignmentModal" class="modal">
             <div class="modal-content">
                 <div class="modal-header">
                     <span class="close">&times;</span>
-                    <h2>Upload Assignment</h2>
+                    <h2 id="modalTitle">Upload Assignment</h2>
                 </div>
                 <div class="modal-body">
-                    <form action="#" method="post" enctype="multipart/form-data">
+                    <form id="assignmentForm" action="{% url 'saveAssignments' %}?id={{id_number}}" method="post" enctype="multipart/form-data">
                         {% csrf_token %}
+                        <input type="hidden" id="assignmentId" name="assignment_id">
                         <label for="assignment_number">Assignment Number:</label>
                         <input type="text" id="assignment_number" name="assignment_number" required>
 
@@ -296,53 +297,63 @@
                         <label for="class">Class:</label>
                         <input type="text" id="class" name="class" required>
 
-                        <label for="posting_date">Posting Date:</label>
-                        <input type="date" id="posting_date" name="posting_date" required>
-
                         <label for="submission_date">Submission Date:</label>
                         <input type="date" id="submission_date" name="submission_date" required>
 
                         <label for="questions">Questions:</label>
                         <textarea id="questions" name="questions" rows="4" required></textarea>
 
-                        <label for="submitted_by">Submitted By:</label>
-                        <input type="text" id="submitted_by" name="submitted_by" required>
+                        <!-- <label for="submitted_by">Submitted By:</label>
+                        <input type="text" id="submitted_by" name="submitted_by" required> -->
 
                         <label for="unit_number">Unit Number:</label>
                         <input type="text" id="unit_number" name="unit_number" required>
-
-                        <div class="modal-footer">
-                            <button type="submit">Submit</button>
-                            <button type="button" class="close" id="closeModal">Close</button>
-                        </div>
                     </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" form="assignmentForm">Save</button>
+                    <button type="button" id="cancelButton">Cancel</button>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        // Modal functionality
-        var modal = document.getElementById("assignmentModal");
-        var btn = document.getElementById("openModal");
-        var span = document.getElementsByClassName("close")[0];
-        var closeBtn = document.getElementById("closeModal");
+        // Get the modal
+        var modal = document.getElementById('assignmentModal');
 
+        // Get the button that opens the modal
+        var btn = document.getElementById('openModal');
+
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName('close')[0];
+
+        // Get the cancel button element
+        var cancelButton = document.getElementById('cancelButton');
+
+        // Get all edit buttons
+        var editButtons = document.getElementsByClassName('edit');
+
+        // When the user clicks the button, open the modal 
         btn.onclick = function() {
-            modal.style.display = "block";
+            document.getElementById('assignmentForm').reset();
+            document.getElementById('modalTitle').textContent = 'Upload Assignment';
+            document.getElementById('assignmentId').value = '';
+            modal.style.display = 'block';
         }
 
+        // When the user clicks on <span> (x) or cancel button, close the modal
         span.onclick = function() {
-            modal.style.display = "none";
+            modal.style.display = 'none';
+        }
+        cancelButton.onclick = function() {
+            modal.style.display = 'none';
         }
 
-        closeBtn.onclick = function() {
-            modal.style.display = "none";
-        }
-
+        // When the user clicks anywhere outside of the modal, close it
         window.onclick = function(event) {
             if (event.target == modal) {
-                modal.style.display = "none";
+                modal.style.display = 'none';
             }
         }
     </script>

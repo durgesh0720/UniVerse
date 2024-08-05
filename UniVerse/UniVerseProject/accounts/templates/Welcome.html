@@ -1,114 +1,45 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile | {{firstname}} {{lastname}}</title>
-    <style>
-        *{
-            margin: 0;
-            padding: 0;
-        }
-        body{
-            background-color: #FDDE55;
-            font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        .main-box{
-            display: flex;
-            flex-direction: column;
-            justify-content: space-around;
-            align-items: center;
-            margin: 20px;
-        }
-        .head {
-            margin-top: 20px;
-            width: 100%;
-            background-color: #03AED2;
-        }
-        .head header{
-            font-size: 200%;
-            text-align: center;
-            color: white;
-        }
-        .navbar{
-            margin-top: 20px;
-            width: 100%;
-            margin-bottom: 20px;
-        }
-        .navbar nav{
-            display: flex;
-            flex-direction: row;
-            justify-content: space-around;
-            align-items: center;
-            margin: 10px;
-        }
-        .navbar nav button{
-            padding: 10px;
-        }
-        .main-head{
-            background-color: #03AED2;
-            width: 100%;
-            margin-bottom: 20px;
-            padding: 10px;
-            max-width:50%;
-        }
-        .main-head header{
-            color: white;
-            text-align: center;
-            font-size: 1.2rem;
-            font-weight: bold;
-        }
-        .Annoucements{
-            width: 100%;
-            background-color: #68D2E8;
-            margin-bottom: 20px;
-            padding: 10px;
-            max-width:50%;
-        }
-        .Annoucements header{
-            font-size: 1.1rem;
-            text-align: center;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-        .Annoucements span{
-            display: block;
-            text-align: center;
-        }
-        a{
-            text-decoration: none;
-        }
-    </style>
+    <title>{{firstname}} {{lastname}}</title>
+    <link rel="stylesheet" href="{% static 'accounts/css/welcome.css' %}">
 </head>
 <body>
-    <div class="main-box">
-        <div class="head">
-            <Header>Welcome to {{firstname}} {{lastname}}</Header>
-        </div>
-        <div class="navbar">
-            <nav>
+    <div class="main-container">
+        <header class="header">
+            <h1>Welcome, {{firstname}} {{lastname}}</h1>
+            <nav class="navbar">
                 <button><a href="#">Class Status</a></button>
-                <button><a href="#">Dashboard</a></button>
+                <button><a href="{% url 'dashboard_url' %}">Dashboard</a></button>
                 <button><a href="{% url 'profile' %}?username={{ username }}">Profile</a></button>
-                <button><a href="#">Massages</a></button>
+                <button><a href="#">Messages</a></button>
+                {% if user.is_authenticated %}
                 <button><a href="{% url 'logout' %}">Log out</a></button>
+                {% else %}
+                <button><a href="{% url 'login' %}">Login</a></button>
+                {% endif %}
             </nav>
-        </div>
-        <div class="main-head">
-            <header>College news and Posts</header>
-        </div>
-        <div class="Annoucements">
-            <header>Official Annoucements</header>
-            <span>Importaint updates form college Administration</span>
-        </div>
-        <div class="Annoucements">
-            <header>Events and Activities</header>
-            <span>Information about upcoming events, workshops, seminars, and competitions.</span>
-        </div>
-        <div class="Annoucements">
-            <header>Communitiy Posts</header>
-            <span>Allow students to post their achievements, thoughts, and experiences.</span>
-        </div>
+        </header>
+
+        <main class="content">
+            <section class="section announcements">
+                <h2>Official Announcements</h2>
+                <p>Important updates from the college administration.</p>
+            </section>
+
+            <section class="section events">
+                <h2>Events and Activities</h2>
+                <p>Information about upcoming events, workshops, seminars, and competitions.</p>
+            </section>
+
+            <section class="section community">
+                <h2>Community Posts</h2>
+                <p>Allow students to post their achievements, thoughts, and experiences.</p>
+            </section>
+        </main>
     </div>
 </body>
 </html>

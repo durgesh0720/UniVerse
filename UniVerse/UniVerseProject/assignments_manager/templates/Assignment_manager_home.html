@@ -67,7 +67,7 @@
         <div class="section" id="upload-assignment">
             <h2>Upload Assignment</h2>
             <p>Use this section to add new assignments for students.</p>
-            <a href="{% url 'upload-assignment' %}" class="btn">Upload Assignment</a>
+            <a href="{% url 'upload-assignment' %}?username={{username}}" class="btn">Upload Assignment</a>
         </div>
 
         <div class="section" id="check-submissions">

@@ -5,7 +5,6 @@ from django.contrib.auth.models import User
 
 class admin_registration(models.Model):
     user = models.OneToOneField(User, on_delete=models.SET_NULL, null=True, blank=True)
-    assignment = models.ForeignKey('assignments_manager.AssignmentDetails', on_delete=models.SET_NULL, null=True, blank=True)
     id_number=models.IntegerField(primary_key=True)
     mobile=models.CharField(max_length=15,null=True)
 

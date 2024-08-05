@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Assignments</title>
+    <link rel="stylesheet" href="{% static 'accounts/css/assignments.css' %}">
+</head>
+<body>
+    <div class="assignments-container">
+        <header class="page-header">
+            <h1>My Assignments</h1>
+        </header>
+        
+        <nav class="assignments-nav">
+            <ul>
+                <li><a href="{% url 'profile' %}?username={{ user.username }}">Profile</a></li>
+                <li><a href="#">Dashboard</a></li>
+                <li><a href="#">Logout</a></li>
+            </ul>
+        </nav>
+
+        <main class="assignments-list">
+            {% for assignment in assignments %}
+            <div class="assignment-card">
+                <h2>{{ assignment.title }}</h2>
+                <p><strong>Due Date:</strong> {{ assignment.due_date }}</p>
+                <p>{{ assignment.questions }}</p>
+                <a href="#" class="submit-btn">Submit</a>
+            </div>
+            {% empty %}
+            <p>No assignments available.</p>
+            {% endfor %}
+        </main>
+    </div>
+
+    <script src="{% static 'accounts/js/assignments.js' %}"></script>
+</body>
+</html>

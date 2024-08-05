@@ -1,0 +1,192 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <style>
+        body {
+    background-color: #181818;
+    color: #ffffff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    height: 100vh;
+}
+
+.dashboard-container {
+    display: flex;
+    width: 100%;
+}
+
+.sidebar {
+    width: 250px;
+    background-color: #1f1f1f;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    transition: width 0.3s;
+}
+
+.sidebar:hover {
+    width: 300px;
+}
+
+.admin-profile {
+    text-align: center;
+    margin-bottom: 40px;
+    animation: fadeIn 1s ease-in-out;
+}
+
+.admin-avatar {
+    width: 80px;
+    height: 80px;
+    background-color: #007BFF;
+    border-radius: 50%;
+    margin-bottom: 10px;
+    transition: transform 0.3s;
+}
+
+.admin-avatar:hover {
+    transform: scale(1.1);
+}
+
+.admin-name {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.sidebar-nav ul {
+    list-style-type: none;
+    padding: 0;
+    animation: slideIn 0.5s ease-in-out;
+}
+
+.sidebar-nav ul li {
+    margin: 20px 0;
+}
+
+.nav-link {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 18px;
+    transition: color 0.3s ease;
+    position: relative;
+}
+
+.nav-link::before {
+    content: '';
+    position: absolute;
+    left: -10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 6px;
+    height: 6px;
+    background-color: transparent;
+    border-radius: 50%;
+    transition: background-color 0.3s ease, left 0.3s ease;
+}
+
+.nav-link:hover::before {
+    background-color: #007BFF;
+    left: -20px;
+}
+
+.nav-link:hover {
+    color: #007BFF;
+}
+
+.main-content {
+    flex-grow: 1;
+    padding: 40px;
+    overflow-y: auto;
+    background-color: #1c1c1c;
+}
+
+.content-section {
+    margin-bottom: 40px;
+    animation: fadeInUp 0.5s ease-in-out;
+}
+
+.content-section h2 {
+    border-bottom: 2px solid #007BFF;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(-100%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="admin-profile">
+                <div class="admin-avatar"></div>
+                <div class="admin-name">Admin Name</div>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="#quizzes" class="nav-link">Upload Quizzes</a></li>
+                    <li><a href="#assignments" class="nav-link">Upload Assignments</a></li>
+                    <li><a href="#attendance" class="nav-link">Update Attendances</a></li>
+                    <li><a href="#news" class="nav-link">Post News</a></li>
+                    <li><a href="#students" class="nav-link">Student Details</a></li>
+                </ul>
+            </nav>
+        </aside>
+        <main class="main-content">
+            <section id="quizzes" class="content-section">
+                <h2>Upload Quizzes</h2>
+                <!-- Content for Upload Quizzes -->
+            </section>
+            <section id="assignments" class="content-section">
+                <h2>Upload Assignments</h2>
+                <!-- Content for Upload Assignments -->
+            </section>
+            <section id="attendance" class="content-section">
+                <h2>Update Attendances</h2>
+                <!-- Content for Update Attendances -->
+            </section>
+            <section id="news" class="content-section">
+                <h2>Post News</h2>
+                <!-- Content for Post News -->
+            </section>
+            <section id="students" class="content-section">
+                <h2>Student Details</h2>
+                <!-- Content for Student Details -->
+            </section>
+        </main>
+    </div>
+</body>
+</html>

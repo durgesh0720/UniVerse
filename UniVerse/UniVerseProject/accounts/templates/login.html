@@ -1,122 +1,40 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>login Page</title>
-    <style>
-        body {
-            background-color: #797d80;
-            font-family: arial, sans-serif;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-        #main-container {
-            background-color: white;
-            padding: 20px;
-            border: 2px solid black;
-
-            border-radius: 10px;
-            width: 85%;
-            max-width: 500px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        h1 {
-            text-align: center;
-        }
-        label {
-            display: block;
-            margin-top: 10px;
-        }
-        input[type="text"], input[type="password"] {
-            width: 90%;
-            padding: 10px;
-            margin-top: 5px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        .show-password {
-            display: inline-block;
-            margin-top: 10px;
-        }
-        button {
-            display: block;
-            width: 70%;
-            padding: 10px;
-            margin-top: 15px;
-            background-color: #470e91;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: large;
-            margin-left: 14%;
-            transition: transform 0.2s;
-        }
-        button:hover {
-            background-color: #660cdb;
-            transform: translateY(-2px);
-        }
-        #main-container:hover{
-            transform: translateY(-3px);
-            box-shadow: 0 0 15px black;
-        }
-        #error{
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-            align-items: center;
-            margin-top: 10px;
-            color: red;
-        }
-        .signup{
-            text-align: center;
-        }
-        button a{
-            text-decoration: none;
-            color:  white;
-            font-weight: lighter;
-        }
-    </style>
+    <title>Login</title>
+    <link rel="stylesheet" href="{% static 'accounts/css/login.css' %}">
 </head>
 <body>
-    <div id="main-container">
-        <h1>Login to your account</h1>
-        <div class="signup">Don't have an account <a href="{% url 'signup' %}">signup</a></div>
+    <div class="container">
+        <header>
+            <h1>Login</h1>
+        </header>
         <form action="{% url 'checkUser' %}" method="post" id="login-form">
             {% csrf_token %}
             <label for="username">Username:</label>
-            <input type="text" name="username" id="username" required> <br>
+            <input type="text" name="username" id="username" placeholder="Enter your username" required>
     
             <label for="password">Password:</label>
-            <input type="password" name="password" id="password" required> <br>
+            <input type="password" name="password" id="password" placeholder="Enter your password" required>
     
-            <input type="checkbox" id="show-password" class="show-password">
-            <label for="show-password" class="show-password">Show Password</label> <br>
+            <div class="show-password-container">
+                <input type="checkbox" id="show-password" class="show-password">
+                <label for="show-password">Show Password</label>
+            </div>
     
             <button type="submit">Login</button>
-            <button><a href="{% url 'home' %}">Back to Home</a></button>
+            <button class="back-home"><a href="{% url 'home' %}">Back to Home</a></button>
         </form>
-        
         <div id="error">
             {{errmsg}}
         </div>
+        <footer>
+            <p>Don't have an account? <a href="{% url 'signup' %}">Sign up</a></p>
+        </footer>
     </div>
-    
-    <script>
-        const passwordInput = document.getElementById('password');
-        const showPasswordCheckbox = document.getElementById('show-password');
-
-        showPasswordCheckbox.addEventListener('change', function() {
-            if (this.checked) {
-                passwordInput.type = 'text';
-            } else {
-                passwordInput.type = 'password';
-            }
-        });
-    </script>
+    <script src="{% static 'accounts/js/login.js' %}"></script>
 </body>
 </html>

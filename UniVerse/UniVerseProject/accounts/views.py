@@ -24,13 +24,33 @@ def signup(request):
     return render(request,"signup.html",d1)
 
 def log_in(request):
-    d1={}
     try:
-        if request.GET['error']==str(1):
-            d1['errmsg']="Username and password dosen't matched "
-    except:
-        d1['errmsg']=""
-    return render(request,"login.html",d1)
+        d1={}
+        try:
+            if request.GET['error']==str(1):
+                d1['errmsg']="Username and password dosen't matched "
+        except:
+            d1['errmsg']=""
+        return render(request,"login.html",d1)
+    except Exception as e:
+        print(f"Exception of User login: {e}")
+        return redirect('login')
+    
+login_required(login_url='login')
+def welcomepage(request):
+    try:
+        username=request.GET.get('username')
+        user=User.objects.filter(username=username).first()
+        context={
+            'firstname':user.first_name,
+            'lastname':user.last_name,
+            'username':user.username,
+        }
+        return render(request,'Welcome.html',context)
+    except Exception as e:
+        print(f"Exception in Welcome Page: {e}")
+        return redirect('login')
+
 
 @login_required(login_url='login')
 @csrf_protect
@@ -56,12 +76,8 @@ def saveUsers(request):
                 )
                 student.save()   
                 print(f'student:{student}')         
-                context = {
-                    'firstname': request.POST['firstname'],
-                    'lastname': request.POST['lastname'],
-                    'username': request.POST['username']
-                }
-                return render(request, "Welcome.html", context)
+                username=user.username
+                return redirect(f'/welcome/?username={username}')
             else:
                 url = "http://localhost:8000/signup?error=1"
                 return redirect(url)
@@ -81,17 +97,13 @@ def checkUser(request):
                 return redirect('/login?error=1')
             else:
                 login(request, user)
-                context = {
-                    'firstname': user.first_name,
-                    'lastname': user.last_name,
-                    'username': user.username,
-                }
-                return render(request, "Welcome.html", context)
+                return redirect(f'/welcome/?username={username}')
         else:
             return redirect('/login?error=1')
     except Exception as e:
         print(f"Error during authentication: {e}")
         return redirect('/login?error=1')
+
 @login_required(login_url='login')
 def profile(request):
     try:
@@ -182,3 +194,6 @@ def update_profile(request):
 def log_out(request):
     logout(request)
     return redirect("home")
+
+def dashboard(request):
+    return render(request,"dashboard.html")

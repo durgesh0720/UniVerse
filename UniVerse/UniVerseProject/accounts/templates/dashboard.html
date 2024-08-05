@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard</title>
+    <link rel="stylesheet" href="{% static 'accounts/css/dashboard.css' %}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Welcome to UniVerse Dashboard</h1>
+        </header>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="#assignments" id="assignments-btn">Assignments</a></li>
+                <li><a href="#attendance" id="attendance-btn">Attendance</a></li>
+                <li><a href="#quizzes" id="quizzes-btn">Quizzes</a></li>
+                <li><a href="#status" id="status-btn">Student Status</a></li>
+            </ul>
+        </nav>
+        <main>
+            <section id="assignments" class="content">
+                <h2>Assignments</h2>
+                <!-- Content for Assignments -->
+            </section>
+            <section id="attendance" class="content">
+                <h2>Attendance</h2>
+                <!-- Content for Attendance -->
+            </section>
+            <section id="quizzes" class="content">
+                <h2>Quizzes</h2>
+                <!-- Content for Quizzes -->
+            </section>
+            <section id="status" class="content">
+                <h2>Student Status</h2>
+                <!-- Content for Student Status -->
+            </section>
+        </main>
+        <footer>
+            <p>&copy; 2024 UniVerse. All rights reserved.</p>
+        </footer>
+    </div>
+    <script src="scripts.js"></script>
+</body>
+</html>

@@ -11,5 +11,8 @@ urlpatterns=[
     path('sign-out/',views.sign_out,name='sign-out'),
     path('assignment-manager/',_views.assignment_home,name='assignment-home'),
     path('upload-assignment/',_views.upload_assignment,name='upload-assignment'),
-    
+    path('save-assignments/',_views.saveAssignments,name="saveAssignments"),
+    path('edit-assignment/',_views.editAssignment,name="editAssignment"),
+    path('update-assignment/',_views.updateAssignment,name="updateAssignment"),
+    path('delete-assignment/',_views.deleteAssignment,name="deleteAssignment"),
 ]
