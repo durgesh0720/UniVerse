@@ -1,0 +1,13 @@
+
+		
+		**Tools**
+
+1. www.framer.com/motion
+2. www.react-spring.dev/
+3. www.remotion.dev/
+4. https://react-awesome-reveal.morello.dev/
+5. https://react-move-docs.netlify.app/
+
+
+https://drive.google.com/drive/u/0/mobile/folders/1Py63S2kfCiceJSeaWkydUiq6OyUEUSdc
+			

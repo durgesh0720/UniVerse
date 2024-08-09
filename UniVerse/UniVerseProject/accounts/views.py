@@ -6,6 +6,7 @@ from django.views.decorators.csrf import csrf_protect, ensure_csrf_cookie
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
+from assignments_manager import views #type: ignore
 
 import logging
 logger = logging.getLogger(__name__)
@@ -51,8 +52,6 @@ def welcomepage(request):
         print(f"Exception in Welcome Page: {e}")
         return redirect('login')
 
-
-@login_required(login_url='login')
 @csrf_protect
 def saveUsers(request):
     try:
@@ -111,8 +110,8 @@ def profile(request):
         user = get_object_or_404(User, username=username)
         student = get_object_or_404(student_registration, user=user)
         return render(request, "profile.html", {"user": user, "student": student})
-    except:
-        print(request)
+    except Exception as e:
+        print(f'Exception occured from Account/profile {e}')
         return redirect('login')
     
 @login_required(login_url='login')
@@ -136,7 +135,7 @@ def update_profile(request):
             lastname = request.POST['lastname']
             mobile = request.POST['mobile']
             email = request.POST['email']
-            admission_year = request.POST['admission_year']
+            sem = request.POST['sem']
             rollnumber = request.POST['rollnumber']
             enrollment = request.POST['enrollment']
             profile_picture = request.FILES.get('profile_picture')
@@ -145,11 +144,6 @@ def update_profile(request):
             bio = request.POST['bio']
             profession = request.POST['profession']
             dob=request.POST['dob']
-
-            print("Received POST data:")
-            print(f"username: {username}, firstname: {firstname}, lastname: {lastname}")
-            print(f"mobile: {mobile}, email: {email}, admission_year: {admission_year}")
-            print(f"rollnumber: {rollnumber}, enrollment: {enrollment}")
             # print(f"profile_picture: {profile_picture}, course: {course}")
 
             user = get_object_or_404(User, username=username)
@@ -166,7 +160,7 @@ def update_profile(request):
             student.enrollment = enrollment
             student.course = course
             student.mobile = mobile
-            student.admission_year = admission_year
+            student.semester = sem
             student.bio=bio
             student.dob=dob
             student.address=address

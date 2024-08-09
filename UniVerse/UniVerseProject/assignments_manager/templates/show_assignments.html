@@ -1,10 +1,11 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Assignments</title>
-    <link rel="stylesheet" href="{% static 'accounts/css/assignments.css' %}">
+    <link rel="stylesheet" href="{% static 'assignments_manager/css/show_assignments.css' %}">
 </head>
 <body>
     <div class="assignments-container">
@@ -14,26 +15,118 @@
         
         <nav class="assignments-nav">
             <ul>
-                <li><a href="{% url 'profile' %}?username={{ user.username }}">Profile</a></li>
+                <li><a href="#">Profile</a></li>
                 <li><a href="#">Dashboard</a></li>
                 <li><a href="#">Logout</a></li>
+                <li><a href="{% url 'welcomepage' %}?username={{username}}">Home</a></li>
             </ul>
         </nav>
 
         <main class="assignments-list">
-            {% for assignment in assignments %}
-            <div class="assignment-card">
-                <h2>{{ assignment.title }}</h2>
-                <p><strong>Due Date:</strong> {{ assignment.due_date }}</p>
-                <p>{{ assignment.questions }}</p>
-                <a href="#" class="submit-btn">Submit</a>
-            </div>
-            {% empty %}
-            <p>No assignments available.</p>
-            {% endfor %}
+            {% if eligible %}
+                {% for assignment in assignments %}
+                <div class="assignment-card">
+                    <h2>{{ assignment.unit_title }}</h2>
+                    <p><strong>Class:</strong> {{ assignment.className }} ({{ assignment.semester }} sem)</p>
+                    <p><strong>Subject:</strong> {{ assignment.subject_name }}</p>
+                    <p><strong>Assignment Number:</strong> {{ assignment.assignment_number }}</p>
+                    <p><strong>Unit Number:</strong> {{ assignment.unit_number }}</p>
+                    <p><strong>Created Date:</strong> {{ assignment.created_date }}</p>
+                    <p><strong>Due Date:</strong> {{ assignment.due_date }}</p>
+                    <p><strong>Questions:</strong> {{ assignment.questions }}</p>
+                    <p><strong>Upload by:</strong> {{ assignment.submit_by }}</p>
+                    <p>{{ assignmentStatus }}</p>
+                    {% if massage %}
+                    <small>{{ massage }}</small>
+                    {% endif %}
+                    <button class="upload-btn" data-assignment-id="{{ assignment.id }}">Upload Assignment</button>
+                </div>
+                {% empty %}
+                <p>No assignments available.</p>
+                {% endfor %}
+            {% else %}
+                <p style="color: red; font-style: italic; font-weight: bold; text-align: center;">First set up your profile, then view your assignments.</p>
+            {% endif %}
         </main>
     </div>
 
-    <script src="{% static 'accounts/js/assignments.js' %}"></script>
+    <div id="upload-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2>Upload Assignment</h2>
+            <form id="upload-form" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input type="hidden" name="assignment_id" id="assignment-id">
+                <label for="file-upload">Select file:</label>
+                <input type="file" name="assignment_file" id="file-upload" required>
+                <button type="submit" class="submit-btn">Upload</button>
+                <div id="status-message"></div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const username = "{{ username }}";
+            const saveAssignmentUrl = "{% url 'saveStudentAssignment' %}";
+
+            const uploadButtons = document.querySelectorAll('.upload-btn');
+            const modal = document.getElementById('upload-modal');
+            const closeModalButton = document.querySelector('.close-btn');
+            const uploadForm = document.getElementById('upload-form');
+            const statusMessage = document.getElementById('status-message');
+            const assignmentIdInput = document.getElementById('assignment-id');
+
+            // Show modal on upload button click
+            uploadButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const assignmentId = this.getAttribute('data-assignment-id');
+                    assignmentIdInput.value = assignmentId;
+                    console.log(assignmentIdInput.value);
+                    modal.style.display = 'block';
+                });
+            });
+
+            closeModalButton.addEventListener('click', function() {
+                modal.style.display = 'none';
+            });
+
+            window.addEventListener('click', function(event) {
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+
+            // Handle form submission
+            uploadForm.addEventListener('submit', function(event) {
+                event.preventDefault();
+                
+                const formData = new FormData(this);
+                formData.append('username', username);
+
+                fetch(`${saveAssignmentUrl}?username=${username}`, {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        statusMessage.textContent = 'Assignment uploaded successfully!';
+                        statusMessage.style.color = 'green';
+                        // Optionally close modal or reset form
+                        setTimeout(() => modal.style.display = 'none', 2000);
+                    } else {
+                        statusMessage.textContent = 'Upload failed. Please try again.';
+                        statusMessage.style.color = 'red';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    statusMessage.textContent = 'An error occurred. Please try again.';
+                    statusMessage.style.color = 'red';
+                });
+            });
+        });
+    </script>
 </body>
 </html>

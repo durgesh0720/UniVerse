@@ -15,4 +15,5 @@ urlpatterns=[
     path('edit-assignment/',_views.editAssignment,name="editAssignment"),
     path('update-assignment/',_views.updateAssignment,name="updateAssignment"),
     path('delete-assignment/',_views.deleteAssignment,name="deleteAssignment"),
+    path('show-submissions/',_views.showAssignmentSubmissions,name="studentSubmissions")
 ]

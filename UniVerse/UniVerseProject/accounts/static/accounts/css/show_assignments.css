@@ -91,3 +91,9 @@ body {
 .assignment-card .submit-btn:hover {
     background-color: #ff7000;
 }
+#no_assignments{
+    text-align: center;
+    font-weight: 600;
+    font-size: large;
+    color: red;
+}

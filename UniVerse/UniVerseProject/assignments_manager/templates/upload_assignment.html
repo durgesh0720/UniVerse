@@ -1,239 +1,11 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Assignment Manager</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #007bff67;
-            color: #333;
-            margin: 0;
-            padding: 0;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: auto;
-            margin-top: 20px;
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        h1 {
-            text-align: center;
-            color: #333;
-            margin-bottom: 20px;
-        }
-
-        .upload-button {
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
-            margin-bottom: 20px;
-            display: block;
-            text-align: center;
-            transition: background-color 0.3s;
-        }
-
-        .upload-button:hover {
-            background-color: #0056b3;
-        }
-
-        /* Modal Styles */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0,0,0,0.5);
-            padding-top: 60px;
-        }
-
-        .modal-content {
-            background-color: #fff;
-            margin: 5% auto;
-            padding: 20px;
-            border-radius: 8px;
-            width: 90%;
-            max-width: 600px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .modal-header {
-            border-bottom: 1px solid #ddd;
-            padding-bottom: 10px;
-            margin-bottom: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .modal-header h2 {
-            margin: 0;
-            color: #333;
-        }
-
-        .modal-header .close {
-            font-size: 24px;
-            color: #aaa;
-            cursor: pointer;
-        }
-
-        .modal-header .close:hover {
-            color: #000;
-        }
-
-        .modal-body {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .modal-body label {
-            margin: 10px 0 5px;
-            font-weight: bold;
-        }
-
-        .modal-body input, .modal-body textarea {
-            width: 90%;
-            padding: 12px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-size: 16px;
-            margin-bottom: 15px;
-        }
-
-        .modal-body textarea {
-            resize: vertical;
-        }
-
-        .modal-footer {
-            border-top: 1px solid #ddd;
-            padding-top: 10px;
-            display: flex;
-            justify-content: space-evenly;
-        }
-
-        .modal-footer button {
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: background-color 0.3s;
-        }
-
-        .modal-footer button:hover {
-            background-color: #0056b3;
-        }
-
-        /* Responsive Design for Table */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 20px;
-            border: 2px solid #007bff;
-            background-color: #007bff2d;
-        }
-
-        thead {
-            background-color: #007bff;
-            color: #fff;
-        }
-
-        th, td {
-            padding: 12px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
-
-        th {
-            font-weight: bold;
-        }
-
-        .actions {
-            text-align: center;
-        }
-
-        .actions button {
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            padding: 6px 12px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 14px;
-            margin: 2px;
-        }
-
-        .actions button:hover {
-            background-color: #0056b3;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .modal-content {
-                width: 95%;
-                margin: 5% auto;
-            }
-
-            .modal-body input, .modal-body textarea {
-                font-size: 14px;
-                padding: 10px;
-            }
-
-            .modal-footer button {
-                padding: 10px 20px;
-                font-size: 14px;
-            }
-
-            table, thead, tbody, th, td, tr {
-                display: block;
-            }
-
-            thead tr {
-                position: absolute;
-                top: -9999px;
-                left: -9999px;
-            }
-
-            tr {
-                border: 1px solid #ddd;
-                margin-bottom: 10px;
-            }
-
-            td {
-                border: none;
-                border-bottom: 1px solid #ddd;
-                position: relative;
-                padding-left: 50%;
-                white-space: wrap;
-            }
-
-            td::before {
-                content: attr(data-label);
-                position: absolute;
-                left: 0;
-                width: 50%;
-                padding-left: 10px;
-                font-weight: bold;
-                white-space: nowrap;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="{% static 'assignments_manager/css/upload_assignment.css' %}">
 </head>
 <body>
     <div class="container">
@@ -243,12 +15,14 @@
             <thead>
                 <tr>
                     <th>Assignment Number</th>
-                    <th>Title</th>
+                    <th>Unit Title</th>
                     <th>Class</th>
+                    <th>Semester</th>
+                    <th>Subject Name</th>
                     <th>Posting Date</th>
                     <th>Submission Date</th>
                     <th>Questions</th>
-                    <th>Submitted By</th>
+                    <th>Professor</th>
                     <th>Unit Number</th>
                     <th class="actions">Actions</th>
                 </tr>
@@ -258,16 +32,19 @@
                     {% for assignment in assignments %}
                         <tr>
                             <td data-label="Assignment Number">{{ assignment.assignment_number }}</td>
-                            <td data-label="Title">{{ assignment.unit_title }}</td>
+                            <td data-label="Unit Title">{{ assignment.unit_title }}</td>
                             <td data-label="Class">{{ assignment.className }}</td>
+                            <td data-label="Semester">- {{assignment.semester}} Sem</td>
+                            <td data-label="Subject Name">{{assignment.subject_name}}</td>
                             <td data-label="Posting Date">{{ assignment.created_date }}</td>
                             <td data-label="Submission">{{ assignment.due_date }}</td>
                             <td data-label="Questions">{{ assignment.questions }}</td>
-                            <td data-label="Submitted By">{{ assignment.submit_by }}</td>
+                            <td data-label="Professor">{{ assignment.submit_by }}</td>
                             <td data-label="Unit Number">{{ assignment.unit_number }}</td>
                             <td class="actions">
                             <button class="edit"><a href="{% url 'editAssignment' %}?id={{assignment.id}}">Edit</a></button>
                             <button class="delete"><a href="{% url 'deleteAssignment' %}?id={{assignment.id}}">Delete</a></button>
+                            <button class="delete"><a href="{% url 'studentSubmissions' %}?id={{assignment.id}}">Check Sub.</a></button>
                             </td>
                         </tr>
                     {% endfor %}
@@ -291,11 +68,24 @@
                         <label for="assignment_number">Assignment Number:</label>
                         <input type="text" id="assignment_number" name="assignment_number" required>
 
-                        <label for="title">Title:</label>
+                        <label for="title">Unit title:</label>
                         <input type="text" id="title" name="title" required>
 
-                        <label for="class">Class:</label>
-                        <input type="text" id="class" name="class" required>
+                        <label for="course">Course:</label>
+                        <select id="course" name="course" required>
+                            <option value="">Select your course</option>
+                            <option value="BTech">B.Tech</option>
+                            <option value="MTech">M.Tech</option>
+                            <option value="BSc">B.Sc</option>
+                            <option value="MSc">M.Sc</option>
+                            <option value="BCA">BCA</option>
+                            <option value="BBA">BBA</option>
+                        </select>
+
+                        <label for="semester">Semester:</label>
+                        <select id="semester" name="sem" required>
+                            <option value="">Select your semester</option>
+                        </select>
 
                         <label for="submission_date">Submission Date:</label>
                         <input type="date" id="submission_date" name="submission_date" required>
@@ -303,8 +93,8 @@
                         <label for="questions">Questions:</label>
                         <textarea id="questions" name="questions" rows="4" required></textarea>
 
-                        <!-- <label for="submitted_by">Submitted By:</label>
-                        <input type="text" id="submitted_by" name="submitted_by" required> -->
+                        <label for="SubjectName">Subject Name:</label>
+                        <input type="text" id="SubjectName" name="SubjectName" required>
 
                         <label for="unit_number">Unit Number:</label>
                         <input type="text" id="unit_number" name="unit_number" required>
@@ -317,45 +107,6 @@
             </div>
         </div>
     </div>
-
-    <script>
-        // Get the modal
-        var modal = document.getElementById('assignmentModal');
-
-        // Get the button that opens the modal
-        var btn = document.getElementById('openModal');
-
-        // Get the <span> element that closes the modal
-        var span = document.getElementsByClassName('close')[0];
-
-        // Get the cancel button element
-        var cancelButton = document.getElementById('cancelButton');
-
-        // Get all edit buttons
-        var editButtons = document.getElementsByClassName('edit');
-
-        // When the user clicks the button, open the modal 
-        btn.onclick = function() {
-            document.getElementById('assignmentForm').reset();
-            document.getElementById('modalTitle').textContent = 'Upload Assignment';
-            document.getElementById('assignmentId').value = '';
-            modal.style.display = 'block';
-        }
-
-        // When the user clicks on <span> (x) or cancel button, close the modal
-        span.onclick = function() {
-            modal.style.display = 'none';
-        }
-        cancelButton.onclick = function() {
-            modal.style.display = 'none';
-        }
-
-        // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = 'none';
-            }
-        }
-    </script>
+    <script src="{% static 'assignments_manager/js/upload_assignment.js' %}"></script>
 </body>
 </html>

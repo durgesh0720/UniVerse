@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from assignments_manager import views as _views #type: ignore
 
 urlpatterns = [
     path("",views.homepage,name="home"),
@@ -13,4 +14,6 @@ urlpatterns = [
     path("edit-profile/",views.edit_profile,name="edit_profile"),
     path("logout/",views.log_out,name="logout"),
     path("dashboard/",views.dashboard,name="dashboard_url"),
+    path("show-assignments/",_views.showAssignmentStudent,name="showAssignmentStudent"),
+    path("save-assignment/",_views.saveStudentAssignment,name="saveStudentAssignment"),
 ]

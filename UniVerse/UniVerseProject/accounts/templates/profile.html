@@ -39,7 +39,7 @@
                 <p><strong>Email:</strong> {{ user.email }}</p>
                 <p><strong>Phone Number:</strong> {{ student.mobile }}</p>
                 <p><strong>Courses Enrolled:</strong> {{ student.course }}</p>
-                <p><strong>Year of Study:</strong> {{ student.admission_year }}</p>
+                <p><strong>Semester:</strong> {{ student.semester }}</p>
             </section>
 
             <section id="about-me" class="info-section">
@@ -55,7 +55,7 @@
 
             <section id="academic-info" class="info-section">
                 <h2>Academic Information</h2>
-                <p><strong>Assignments:</strong> View assignments</p>
+                <p><strong>Assignments:</strong> <a href="{% url 'showAssignmentStudent' %}?username={{ user.username }}">View assignments</a></p>
                 <p><strong>Attendance Record:</strong> View attendance</p>
             </section>
 
