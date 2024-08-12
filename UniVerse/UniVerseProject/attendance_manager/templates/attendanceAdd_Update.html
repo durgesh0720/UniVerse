@@ -1,0 +1,33 @@
+{% extends "attendance_manage_admin.html" %}
+
+{% block content %}
+        <table class="attendance-table">
+            <thead>
+                <tr>
+                    <th> Roll No. </th>
+                    <th> Enrollment </th>
+                    <th> Full Name </th>
+                    <th> Year & month(YYYY-MM) </th>
+                    <th> Attendance </th>
+                    <th> Submit </th>
+                    <th> Check Status </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for student in students %}
+                <tr>
+                    <form action="{% url 'attendanceSave' %}" method="post">
+                        {% csrf_token %}
+                        <td><input type="number" name="rollnumber" value="{{ student.rollnumber }}"  readonly></td>
+                        <td><input type="number" name="enrollment" value="{{ student.enrollment }}" readonly></td>
+                        <td>{{ student.first_name }} {{ student.last_name }}</td>
+                        <td><input type="month" name="month" required></td>
+                        <td><input type="number" name="attendance" min="0" max="100" required></td>
+                        <td><input type="submit" value="Submit"></td>
+                    </form>
+                        <td><a href="{% url 'showStatus' %}?rollnumber={{ student.rollnumber }}" style="text-decoration: none; font-weight: bold;"> Status </a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+{% endblock %}

@@ -84,6 +84,7 @@ def saveUsers(request):
         logger.error(f"An error occurred: {e}")
         print(f"An error occurred: {e}")
         return redirect('home')
+    
 def checkUser(request):
     try:
         if request.method=='POST':

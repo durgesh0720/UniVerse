@@ -8,7 +8,7 @@ from .models import AssignmentDetails,UserSubmission,UserDetails
 from django.utils import timezone
 from django.http import JsonResponse
 
-login_required(login_url='loginAdmin')
+@login_required(login_url='loginAdmin')
 def assignment_home(request):
     try:
         username = request.GET.get('username')
@@ -24,7 +24,7 @@ def assignment_home(request):
         print(f"Ecxeption: {e}")
         return redirect('/admin-pannel/loginAdmin?error=2')
     
-login_required(login_url='loginAdmin')
+@login_required(login_url='loginAdmin')
 def upload_assignment(request):
     username = request.GET.get('username')
     admin=User.objects.filter(username=username).first()
@@ -42,7 +42,7 @@ def upload_assignment(request):
          return render(request,"upload_assignment.html",context)
 
 
-login_required(login_url='loginAdmin')
+@login_required(login_url='loginAdmin')
 def saveAssignments(request):
     if request.method=="POST":
         id=request.GET.get('id')
@@ -82,7 +82,7 @@ def saveAssignments(request):
     else:
         return redirect('upload-assignment')
 
-login_required(login_url="loginAdmin")
+@login_required(login_url="loginAdmin")
 def editAssignment(request):
     try:
         assignment_id=request.GET.get('id')
@@ -95,7 +95,7 @@ def editAssignment(request):
     except Exception as e:
         print(f'Exception of Edit Assignment: {e}')
 
-login_required(login_url='loginAdmin')
+@login_required(login_url='loginAdmin')
 def updateAssignment(request):
     url_id = 0
     if request.method == "POST":
@@ -128,7 +128,7 @@ def updateAssignment(request):
         assignment_id=request.GET.get('id')
         return redirect(f'/admin-pannel/edit-assignment/?id={assignment_id}')
 
-login_required(login_url="loginAdmin")
+@login_required(login_url="loginAdmin")
 def deleteAssignment(request):
     id=request.GET.get('id')
     try:
@@ -141,7 +141,7 @@ def deleteAssignment(request):
         print(f'Exception of Update Assignment: {e}')
         return redirect(f'/admin-pannel/edit-assignment/?id={id}')
     
-login_required(login_url='login')
+@login_required(login_url='login')
 def showAssignmentStudent(request):
     eligible = False
     username = request.GET.get('username')

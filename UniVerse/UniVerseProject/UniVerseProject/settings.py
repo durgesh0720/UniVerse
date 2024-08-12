@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'accounts',
     'adminPannel',
     'assignments_manager',
+    'attendance_manager',
 ]
 
 MIDDLEWARE = [

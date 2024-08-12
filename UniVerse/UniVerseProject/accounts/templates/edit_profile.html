@@ -140,15 +140,15 @@
                 </div>
                 <div class="form-group">
                     <label for="mobile">Contact No:</label>
-                    <input type="text" name="mobile" id="mobile" value="{{ student.mobile }}">
+                    <input type="text" name="mobile" id="mobile" value="{{ student.mobile }}" required>
                 </div>
                 <div class="form-group">
                     <label for="email">Email:</label>
-                    <input type="text" name="email" id="email" value="{{ user.email }}">
+                    <input type="text" name="email" id="email" value="{{ user.email }}" required>
                 </div>
                 <div class="form-group">
                     <label for="date_of_birth">Date of Birth:</label>
-                    <input type="date" id="date_of_birth" name="dob" value="{{ student.dob|date:'Y-m-d' }}">
+                    <input type="date" id="date_of_birth" name="dob" value="{{ student.dob|date:'Y-m-d' }}" required>
                 </div>
                 <div class="form-group">
                     <label for="semester">Semester:</label>
@@ -165,12 +165,22 @@
                     </select>
                 </div>
                 <div class="form-group">
+                    {% if student.rollnumber %}
                     <label for="rollnumber">Roll Number:</label>
-                    <input type="text" name="rollnumber" id="rollnumber" value="{{ student.rollnumber }}">
+                    <input type="text" name="rollnumber" id="rollnumber" value="{{ student.rollnumber }}" readonly>
+                    {% else %}
+                    <label for="rollnumber">Roll Number:</label>
+                    <input type="text" name="rollnumber" id="rollnumber" value="{{ student.rollnumber }}" required>
+                    {% endif %}
                 </div>
                 <div class="form-group">
+                    {% if student.enrollment %}
                     <label for="enrollment">Enrollment No:</label>
-                    <input type="text" name="enrollment" id="enrollment" value="{{ student.enrollment }}">
+                    <input type="text" name="enrollment" id="enrollment" value="{{ student.enrollment }}" readonly>
+                    {% else %}
+                    <label for="enrollment">Enrollment No:</label>
+                    <input type="text" name="enrollment" id="enrollment" value="{{ student.enrollment }}" required>
+                    {% endif %}
                 </div>
                 <div class="form-group">
                     <label for="course">Course:</label>

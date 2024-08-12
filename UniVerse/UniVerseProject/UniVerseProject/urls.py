@@ -24,6 +24,7 @@ urlpatterns = [
     path('',include('accounts.urls')),
     path('admin-pannel/',include('adminPannel.urls')),
     path('assignment/',include('assignments_manager.urls')),
+    path('attendanceManager/',include('attendance_manager.urls')),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

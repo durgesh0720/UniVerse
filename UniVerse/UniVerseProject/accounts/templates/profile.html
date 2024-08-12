@@ -56,7 +56,7 @@
             <section id="academic-info" class="info-section">
                 <h2>Academic Information</h2>
                 <p><strong>Assignments:</strong> <a href="{% url 'showAssignmentStudent' %}?username={{ user.username }}">View assignments</a></p>
-                <p><strong>Attendance Record:</strong> View attendance</p>
+                <p><strong>Attendance Record:</strong> <a href="{% url 'showAttendance' %}?rollnumber={{student.rollnumber}}">View attendance</a></p>
             </section>
 
             <section id="activities" class="info-section">
