@@ -1,12 +1,15 @@
 from django.shortcuts import render
 from .models import student_registration
-from django.shortcuts import redirect,get_object_or_404
+from django.shortcuts import redirect,get_object_or_404,get_list_or_404
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_protect, ensure_csrf_cookie
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
-from assignments_manager import views #type: ignore
+from assignments_manager.models import AssignmentDetails #type: ignore
+from attendance_manager.models import AttendanceYear,AttendanceMonth #type: ignore
+from datetime import datetime
+
 
 import logging
 logger = logging.getLogger(__name__)
@@ -190,5 +193,49 @@ def log_out(request):
     logout(request)
     return redirect("home")
 
+login_required(login_url='login')
 def dashboard(request):
-    return render(request,"dashboard.html")
+    context={
+        "error":"Not found data"
+    }
+    username=request.GET.get("username")
+    try:
+        user=User.objects.filter(username=username).first()
+        print(f'user: {user}')
+        student=get_object_or_404(student_registration,user=user)
+        print(f'Student: {student}')
+        context["student"]=student
+        course=student.course
+        semester=student.semester
+        assignments=get_list_or_404(AssignmentDetails,className=course,semester=semester)
+        AssignmentData=[
+            {
+                "due_date":assignment.due_date,
+                "unit_title":assignment.unit_title,
+            }
+            for assignment in assignments
+        ]
+        context["assignments"]=AssignmentData
+
+        current_year = datetime.now().year
+        attendance_y = get_list_or_404(AttendanceYear, user=student, year=current_year)
+        attendance = []
+        for attendance_y in attendance_y:
+            attendance_m = get_list_or_404(AttendanceMonth, attendance_year=attendance_y)
+            months = []
+            for attendance_m in attendance_m:
+                months.append({
+                    "month_name": attendance_m.get_month_display(), 
+                    "attendance_details": f"{attendance_m.present_days} days",
+                })
+            attendance.append({
+                "year": attendance_y.year,
+                "month": months,
+            })
+        context["attendances"] = attendance
+        context['error']=""
+        return render(request,"dashboard.html",context)
+    except Exception as e:
+        print(f'Exception of student dashboard : {e}')
+        context['error']=f"{e}"
+        return render(request,"dashboard.html",context)

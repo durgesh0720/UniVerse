@@ -1,0 +1,123 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #2e2e2e, #1b1b1b);
+    color: #fff;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.container {
+    background: #333;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+    animation: fadeIn 1s ease-out;
+}
+
+header h1 {
+    color: #e0e0e0;
+    margin-bottom: 20px;
+    font-size: 2rem;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+label {
+    text-align: left;
+    font-weight: bold;
+    color: #e0e0e0;
+}
+
+input[type="text"], input[type="password"] {
+    padding: 12px;
+    border: 1px solid #555;
+    border-radius: 8px;
+    font-size: 1rem;
+    width: 100%;
+    box-sizing: border-box;
+    background: #222;
+    color: #fff;
+}
+
+input[type="text"]:focus, input[type="password"]:focus {
+    border-color: #888;
+    outline: none;
+    box-shadow: 0 0 5px rgba(136, 136, 136, 0.5);
+}
+
+.show-password-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+button {
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    color: #fff;
+    background-color: #0072ff;
+    transition: background-color 0.3s, transform 0.3s;
+    width: 100%;
+}
+
+button:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+button.back-home {
+    background-color: #4CAF50;
+    margin-top: 10px;
+}
+
+button.back-home a {
+    color: #fff;
+    text-decoration: none;
+}
+
+#error {
+    color: #ff4d4d;
+    font-size: 0.9rem;
+    margin-top: 10px;
+}
+
+footer p {
+    margin-top: 20px;
+    font-size: 0.9rem;
+}
+
+footer a {
+    color: #0072ff;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

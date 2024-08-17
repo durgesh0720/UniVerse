@@ -1,0 +1,61 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.page-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.page-header h1 {
+    font-size: 28px;
+    color: #333;
+}
+
+.submissions-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.submissions-table th, 
+.submissions-table td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+.submissions-table th {
+    background-color: #007BFF;
+    color: #fff;
+}
+
+.submissions-table td {
+    background-color: #f9f9f9;
+}
+
+.submissions-table td a {
+    color: #007BFF;
+    text-decoration: none;
+}
+
+.submissions-table td a:hover {
+    text-decoration: underline;
+}
+
+.no-submissions {
+    text-align: center;
+    font-style: italic;
+    color: #999;
+}

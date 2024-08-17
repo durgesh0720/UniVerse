@@ -1,12 +1,199 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Dashboard</title>
     <link rel="stylesheet" href="{% static 'accounts/css/dashboard.css' %}">
+    <style>
+        /* Modern Dark Dim Theme */
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #1c1c1e;
+            color: #e0e0e0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 20px 0;
+            background-color: #28282b;
+            color: #e0e0e0;
+            border-bottom: 1px solid #3a3a3c;
+        }
+        nav{
+            margin-top: 10px;
+        }
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            padding: 0;
+            background-color: #2c2c2e;
+            margin: 0;
+            border-bottom: 1px solid #3a3a3c;
+            flex-wrap: wrap;
+            border-radius: 10px;
+        }
+
+        .nav-links li {
+            margin: 0 15px;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: #e0e0e0;
+            font-size: 18px;
+            padding: 14px 20px;
+            display: block;
+            transition: background-color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            background-color:  rgb(233, 97, 0);
+            color: #ffffff;
+        }
+
+        .content {
+            display: block;
+            padding: 20px;
+            background-color: #2c2c2e;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            color: #e0e0e0;
+            border: 1px solid #3a3a3c;
+            flex: 1;
+            min-width: 280px;
+            box-sizing: border-box;
+        }
+
+        h2 {
+            color: rgb(233, 97, 0);
+            border-bottom: 2px solid #3a3a3c;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px 0;
+            background-color: #28282b;
+            color: #e0e0e0;
+            border-top: 1px solid #3a3a3c;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .nav-links li {
+                margin: 10px 0;
+            }
+
+            .container {
+                padding: 10px;
+            }
+
+            .content {
+                padding: 15px;
+            }
+
+            .nav-links a {
+                padding: 10px 15px;
+                font-size: 16px;
+            }
+
+            footer {
+                padding: 15px 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 30px;
+            }
+
+            .nav-links a {
+                font-size: 14px;
+                padding: 8px 10px;
+            }
+
+            h2 {
+                font-size: 20px;
+            }
+
+            .content {
+                padding: 10px;
+            }
+
+            footer p {
+                font-size: 14px;
+            }
+        }
+
+        .assignment-card {
+            background-color: #3a3a3c;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: transform 0.2s ease, background-color 0.3s ease;
+        }
+
+        .assignment-card:hover {
+            transform: translateY(-5px);
+            background-color: #464648;
+        }
+
+        .assignment-card h3 {
+            margin: 0;
+            color: #ffffff;
+        }
+
+        .assignment-card p {
+            margin: 10px 0 0;
+            color: #e0e0e0;
+        }
+
+        .box {
+            display: flex;
+            margin: 5px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .box .content {
+            margin: 10px;
+            margin-left: 10px;
+            width: calc(50% - 40px);
+            box-sizing: border-box;
+            #date{
+                color:crimson;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .box .content {
+                width: calc(100% - 40px);
+            }
+        }
+    </style>
 </head>
+
 <body>
     <div class="container">
         <header>
@@ -14,34 +201,46 @@
         </header>
         <nav>
             <ul class="nav-links">
-                <li><a href="#assignments" id="assignments-btn">Assignments</a></li>
-                <li><a href="#attendance" id="attendance-btn">Attendance</a></li>
+                <li><a href="{% url 'showAssignmentStudent' %}?username={{student.user.username}}" id="assignments-btn">Assignments</a></li>
+                <li><a href="{% url 'showAttendance' %}?rollnumber={{student.rollnumber}}" id="attendance-btn">Attendance</a></li>
                 <li><a href="#quizzes" id="quizzes-btn">Quizzes</a></li>
                 <li><a href="#status" id="status-btn">Student Status</a></li>
+                <li><a href="{% url 'welcomepage'%}?username={{student.user.username}}">Back to Home</a></li>
             </ul>
         </nav>
-        <main>
-            <section id="assignments" class="content">
+        <div class="box">
+            <div id="assignments" class="content">
                 <h2>Assignments</h2>
-                <!-- Content for Assignments -->
-            </section>
-            <section id="attendance" class="content">
-                <h2>Attendance</h2>
-                <!-- Content for Attendance -->
-            </section>
-            <section id="quizzes" class="content">
+                {% for assignment in assignments %}
+                <div class="assignment-card">
+                    <p>Unit Title: {{ assignment.unit_title }}</p>
+                    <p id="date">Due Date: {{assignment.due_date}}</p>
+                </div>
+                {% endfor %}
+            </div>
+            <div id="attendance" class="content">
+                {% if attendances %}
+                    <h2>Attendance for {{ attendances.0.year }}</h2>
+                    {% for month in attendances.0.month %}
+                        <p>{{ month.month_name }} : {{ month.attendance_details }}</p>
+                    {% endfor %}
+                {% else %}
+                    <p>No attendance records available for the current year.</p>
+                {% endif %}
+            </div>
+            
+            <div id="quizzes" class="content">
                 <h2>Quizzes</h2>
-                <!-- Content for Quizzes -->
-            </section>
-            <section id="status" class="content">
+                
+            </div>
+            <div id="status" class="content">
                 <h2>Student Status</h2>
-                <!-- Content for Student Status -->
-            </section>
-        </main>
-        <footer>
-            <p>&copy; 2024 UniVerse. All rights reserved.</p>
-        </footer>
+                
+            </div>
+        </div>
+        {{ error }}
     </div>
-    <script src="scripts.js"></script>
+    <script src="{% static 'accounts/js/scripts.js' %}"></script>
 </body>
+
 </html>
