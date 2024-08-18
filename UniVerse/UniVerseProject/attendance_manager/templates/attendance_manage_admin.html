@@ -100,8 +100,7 @@ h1 {
     margin-bottom: 10px;
 }
 
-.modal form input[type="text"],
-.modal form input[type="number"]{
+.modal form select{
     width: 95%;
     padding: 10px;
     margin-bottom: 15px;
@@ -212,9 +211,26 @@ h1 {
                 <form action="{% url 'attendanceHome' %}" method="post">
                     {% csrf_token %}
                     <label for="class">Class: </label>
-                    <input type="text" name="class" id="class" required>
+                    <select name="class" id="class" required>
+                        <option value="BCA">Bachler of Computer Application</option>
+                        <option value="BBA">Bachler of Bussiness Administration</option>
+                        <option value="B.Sc">Bachler of Science</option>
+                        <option value="B.Tech">Bachler of Technology</option>
+                        <option value="B.A.">Bachler of Arts</option>
+                        <option value="D.Pharm">Diploma in Pharmacy</option>
+                        <option value="B.Pharm">Bachler in Pharmacy</option>
+                    </select>
                     <label for="semester">Semester:</label>
-                    <input type="number" name="sem" id="semester" required>
+                    <select name="sem" id="semester" required>
+                        <option value="1">1 Semester</option>
+                        <option value="2">2 Semester</option>
+                        <option value="3">3 Semester</option>
+                        <option value="4">4 Semester</option>
+                        <option value="5">5 Semester</option>
+                        <option value="6">6 Semester</option>
+                        <option value="7">7 Semester</option>
+                        <option value="8">8 Semester</option>
+                    </select>
                     <input type="submit" value="Submit">
                 </form>
             </div>

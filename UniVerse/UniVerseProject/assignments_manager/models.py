@@ -31,7 +31,7 @@ class UserSubmission(models.Model):
     user=models.ForeignKey(UserDetails,on_delete=models.CASCADE)
     assignment_file = models.FileField(upload_to='assignment_File/')
     submitted_at = models.DateTimeField(auto_now_add=True)
-    is_checked=models.BooleanField(null=True,default=False)
+    status=models.CharField(max_length=10,blank=True)
     assignmentid=models.IntegerField(null=True)
     massage=models.TextField(blank=True)
     def __str__(self):

@@ -145,31 +145,22 @@ def deleteAssignment(request):
 def showAssignmentStudent(request):
     eligible = False
     username = request.GET.get('username')
-    assignment_status = "You need to attempt"
-    admin_message = ""
-
     try:
         student = get_object_or_404(student_registration, user=get_object_or_404(User, username=username))
         student_course = student.course
         student_sem = student.semester
         assignments = get_list_or_404(AssignmentDetails, className=student_course, semester=student_sem)
-
-        try:
-            student_submissions = UserSubmission.objects.filter(user__roll_number=student.rollnumber)
-            # Check if any submission is checked and get the admin message if available
-            for submission in student_submissions:
-                if submission.is_checked:
-                    assignment_status = "Assignment accepted"
-                    if submission.massage:
-                        admin_message = submission.massage
-                else:
-                    assignment_status = "Assignment pending"
-        except Exception as e:
-            print(f'Exception of assignmentsSubmissionStatus: {e}')
-            assignment_status = "You need to attempt"
-
-        assignment_data = [
-            {
+        student_submissions = UserSubmission.objects.filter(user__roll_number=student.rollnumber)
+        submission_status_map = {
+            submission.assignmentid: {
+                'status': submission.status,
+                'message': submission.massage
+            }
+            for submission in student_submissions
+        }
+        assignment_data = []
+        for assignment in assignments:
+            assignment_info = {
                 'assignment_number': assignment.assignment_number,
                 'unit_title': assignment.unit_title,
                 'className': assignment.className,
@@ -180,18 +171,22 @@ def showAssignmentStudent(request):
                 'submit_by': assignment.submit_by,
                 'unit_number': assignment.unit_number,
                 'subject_name': assignment.subject_name,
-                'id':assignment.id,
+                'id': assignment.id,
+                'assignmentStatus': "You need to attempt",  
+                'massage': ""
             }
-            for assignment in assignments
-        ]
+
+            if assignment.id in submission_status_map:
+                assignment_info['assignmentStatus'] = submission_status_map[assignment.id]['status']
+                assignment_info['massage'] = submission_status_map[assignment.id]['message']
+
+            assignment_data.append(assignment_info)
         
         eligible = True
         context = {
             'assignments': assignment_data,
             'username': username,
             'eligible': eligible,
-            'assignmentStatus': assignment_status,
-            'massage': admin_message,
         }
         
         return render(request, "show_assignments.html", context)
@@ -204,33 +199,43 @@ def showAssignmentStudent(request):
         return render(request, "show_assignments.html", context)
     
 def saveStudentAssignment(request):
-    if request.method=='POST':
-        username=request.POST.get('username')
-        assignmentid=request.POST.get('assignment_id')
-        assignment_file=request.FILES.get('assignment_file')
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        assignmentid = request.POST.get('assignment_id')
+        assignment_file = request.FILES.get('assignment_file')
+        
         try:
-            student=get_object_or_404(student_registration,user=get_object_or_404(User,username=username))
+            student = get_object_or_404(student_registration, user=get_object_or_404(User, username=username))
+            submissionUser, created = UserDetails.objects.get_or_create(
+                roll_number=student.rollnumber,
+                defaults={
+                    'first_name': student.user.first_name,
+                    'last_name': student.user.last_name,
+                    '_class': student.course,
+                    'semester': student.semester,
+                }
+            )
             if assignment_file:
-                submissionUser=UserDetails(
-                    first_name=student.user.first_name,
-                    last_name=student.user.last_name,
-                    roll_number=student.rollnumber,
-                    _class=student.course,
-                    semester=student.semester,
-                )
-                submissionUser.save()
-                assignmentSubmission=UserSubmission(
-                    assignment_file=assignment_file,
-                    submitted_at=timezone.now(),
-                    assignmentid=assignmentid,
+                assignmentSubmission, created = UserSubmission.objects.get_or_create(
                     user=submissionUser,
+                    assignmentid=assignmentid,
+                    defaults={
+                        'assignment_file': assignment_file,
+                        'submitted_at': timezone.now(),
+                        'status': "",
+                    }
                 )
-                assignmentSubmission.save()
+                if not created:
+                    assignmentSubmission.assignment_file = assignment_file
+                    assignmentSubmission.submitted_at = timezone.now()
+                    assignmentSubmission.status=""
+                    assignmentSubmission.save()
+                    
             return JsonResponse({'success': True})
         except Exception as e:
-            print(f"Exception occured from saveStudentAssignment: {e}")
-        return JsonResponse({'success': False, 'error': 'Invalid request'}, status=400)
-
+            print(f"Exception occurred in saveStudentAssignment: {e}")
+            return JsonResponse({'success': False, 'error': 'Invalid request'}, status=400)
+        
 def showAssignmentSubmissions(request):
     assignmentid=request.GET.get('id')
     checkAssignments=False
@@ -240,10 +245,11 @@ def showAssignmentSubmissions(request):
         studentSubmissions=[
             {
                 "student_name":submission.user.first_name+" "+submission.user.last_name,
+                "rollnumber":submission.user.roll_number,
                 "file":submission.assignment_file,
-                "class":submission.user._class,
-                "semester":submission.user.semester,
+                "id":submission.assignmentid,
                 "submitted_at":submission.submitted_at,
+                "status":submission.status,
             }
             for submission in assignmentSubmissions
         ]
@@ -255,6 +261,33 @@ def showAssignmentSubmissions(request):
         print(f'Exception occured from showAssignmentSubmissions {e}')
         checkAssignments=True
     return render(request,"showStudentSubmission.html",context)
+
+def updateStatus(request):
+    assignmentid = request.GET.get('id')
+    try:
+        status = request.GET.get('status')
+        message = request.GET.get('message')
+        rollnumber = request.GET.get('rollnumber')
+        user = get_object_or_404(UserDetails, roll_number=rollnumber)
+        assignment = UserSubmission.objects.filter(user=user, assignmentid=assignmentid).first()
+
+        if assignment:
+            assignment.status = status
+            assignment.message = message
+            assignment.save()
+        else:
+            print(f'Assignment with id {assignmentid} not found for user {user.roll_number}')
+        
+        return redirect(f'/admin-pannel/show-submissions/?id={assignmentid}')
+    
+    except Exception as e:
+        print(f'Exception in update_submission_status: {e}')
+        return redirect(f'/admin-pannel/show-submissions/?id={assignmentid}')
+
+
+
+
+
 
 
 

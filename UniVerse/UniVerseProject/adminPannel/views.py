@@ -119,6 +119,7 @@ def Admin_login(request):
                 return redirect('/admin-pannel/loginAdmin?error=1')  
         except Exception as e:
             print(f"Exception: {e}")
+            return redirect('/admin-pannel/loginAdmin?error=1')  
     else:
         return redirect('loginAdmin')
 

@@ -8,172 +8,169 @@
     <link rel="stylesheet" href="{% static 'assignments_manager/css/show_assignments.css' %}">
     <style>
         body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #121212;
-    color: #e0e0e0;
-    margin: 0;
-    padding: 0;
-}
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #121212;
+            color: #e0e0e0;
+            margin: 0;
+            padding: 0;
+        }
 
-.assignments-container {
-    max-width: 900px;
-    margin: 40px auto;
-    padding: 20px;
-    background-color: #1e1e1e;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-}
+        .assignments-container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #1e1e1e;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
 
-.page-header {
-    text-align: center;
-    padding: 20px;
-    border-bottom: 1px solid #333;
-}
+        .page-header {
+            text-align: center;
+            padding: 20px;
+            border-bottom: 1px solid #333;
+        }
 
-.page-header h1 {
-    margin: 0;
-    font-size: 2.5rem;
-    color: #e0e0e0;
-}
+        .page-header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            color: #e0e0e0;
+        }
 
-.assignments-nav {
-    display: flex;
-    justify-content: center;
-    background-color: #333;
-    padding: 10px;
-    border-bottom: 1px solid #444;
-}
+        .assignments-nav {
+            display: flex;
+            justify-content: center;
+            background-color: #333;
+            padding: 10px;
+            border-bottom: 1px solid #444;
+        }
 
-.assignments-nav ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    gap: 20px;
-}
+        .assignments-nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            gap: 20px;
+        }
 
-.assignments-nav ul li {
-    margin: 0;
-}
+        .assignments-nav ul li {
+            margin: 0;
+        }
 
-.assignments-nav ul li a {
-    color: #e0e0e0;
-    text-decoration: none;
-    font-size: 1rem;
-    transition: color 0.3s ease;
-}
+        .assignments-nav ul li a {
+            color: #e0e0e0;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+        }
 
-.assignments-nav ul li a:hover {
-    color: #ff9800;
-}
+        .assignments-nav ul li a:hover {
+            color: #ff9800;
+        }
 
-.assignments-list {
-    padding: 20px;
-}
+        .assignments-list {
+            padding: 20px;
+        }
 
-.assignment-card {
-    background-color: #2c2c2c;
-    border-radius: 8px;
-    padding: 20px;
-    margin-bottom: 20px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
+        .assignment-card {
+            background-color: #2c2c2c;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
 
-.assignment-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
-}
+        .assignment-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+        }
 
-.assignment-card h2 {
-    margin-top: 0;
-    font-size: 1.5rem;
-    color: #ff9800;
-}
+        .assignment-card h2 {
+            margin-top: 0;
+            font-size: 1.5rem;
+            color: #ff9800;
+        }
 
-.assignment-card p {
-    margin: 10px 0;
-}
+        .assignment-card p {
+            margin: 10px 0;
+        }
 
-.assignment-card p strong {
-    color: #ff9800;
-}
+        .assignment-card p strong {
+            color: #ff9800;
+        }
 
-.submit-btn {
-    display: inline-block;
-    padding: 10px 20px;
-    margin-top: 10px;
-    background-color: #ff9800;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    text-decoration: none;
-    transition: background-color 0.3s ease;
-}
+        .submit-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-top: 10px;
+            background-color: #ff9800;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
 
-.submit-btn:hover {
-    background-color: #e68900;
-}
+        .submit-btn:hover {
+            background-color: #e68900;
+        }
 
-/* Add these styles to your existing CSS file */
-.upload-btn {
-    display: inline-block;
-    padding: 10px 20px;
-    margin-top: 10px;
-    background-color: #ff9800;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
+        .upload-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-top: 10px;
+            background-color: #ff9800;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
 
-.upload-btn:hover {
-    background-color: #e68900;
-}
+        .upload-btn:hover {
+            background-color: #e68900;
+        }
 
-/* Modal Styles */
-.modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-}
+        /* Modal Styles */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
 
-.modal-content {
-    background-color: #2c2c2c; /* Dark background to match theme */
-    margin: 15% auto; /* 15% from the top and centered */
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%; /* Could be more or less, depending on screen size */
-    border-radius: 8px;
-}
+        .modal-content {
+            background-color: #2c2c2c; /* Dark background to match theme */
+            margin: 15% auto; /* 15% from the top and centered */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%; /* Could be more or less, depending on screen size */
+            border-radius: 8px;
+        }
 
-.close-btn {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-}
+        .close-btn {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
 
-.close-btn:hover,
-.close-btn:focus {
-    color: #e0e0e0;
-    text-decoration: none;
-    cursor: pointer;
-}
+        .close-btn:hover,
+        .close-btn:focus {
+            color: #e0e0e0;
+            text-decoration: none;
+            cursor: pointer;
+        }
 
-#status-message {
-    margin-top: 15px;
-    font-size: 16px;
-}
-
-
+        #status-message {
+            margin-top: 15px;
+            font-size: 16px;
+        }
     </style>
 </head>
 <body>
@@ -204,9 +201,9 @@
                     <p><strong>Due Date:</strong> {{ assignment.due_date }}</p>
                     <p><strong>Questions:</strong> {{ assignment.questions }}</p>
                     <p><strong>Upload by:</strong> {{ assignment.submit_by }}</p>
-                    <p>{{ assignmentStatus }}</p>
-                    {% if massage %}
-                    <small>{{ massage }}</small>
+                    <p><strong>Status:</strong> {{ assignment.assignmentStatus }}</p>
+                    {% if assignment.massage %}
+                    <small><strong>Message:</strong> {{ assignment.massage }}</small>
                     {% endif %}
                     <button class="upload-btn" data-assignment-id="{{ assignment.id }}">Upload Assignment</button>
                 </div>
@@ -249,48 +246,41 @@
             // Show modal on upload button click
             uploadButtons.forEach(button => {
                 button.addEventListener('click', function() {
-                    const assignmentId = this.getAttribute('data-assignment-id');
-                    assignmentIdInput.value = assignmentId;
-                    console.log(assignmentIdInput.value);
+                    assignmentIdInput.value = this.dataset.assignmentId;
                     modal.style.display = 'block';
                 });
             });
 
+            // Close modal
             closeModalButton.addEventListener('click', function() {
                 modal.style.display = 'none';
             });
 
-            window.addEventListener('click', function(event) {
-                if (event.target === modal) {
-                    modal.style.display = 'none';
-                }
-            });
-
             // Handle form submission
-            uploadForm.addEventListener('submit', function(event) {
-                event.preventDefault();
-                
-                const formData = new FormData(this);
+            uploadForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                const formData = new FormData(uploadForm);
                 formData.append('username', username);
 
-                fetch(`${saveAssignmentUrl}?username=${username}`, {
+                fetch(saveAssignmentUrl, {
                     method: 'POST',
-                    body: formData
+                    body: formData,
+                    headers: {
+                        'X-CSRFToken': '{{ csrf_token }}',
+                    },
                 })
                 .then(response => response.json())
                 .then(data => {
                     if (data.success) {
-                        statusMessage.textContent = 'Assignment uploaded successfully!';
+                        statusMessage.textContent = 'File uploaded successfully.';
                         statusMessage.style.color = 'green';
-                        // Optionally close modal or reset form
-                        setTimeout(() => modal.style.display = 'none', 2000);
                     } else {
-                        statusMessage.textContent = 'Upload failed. Please try again.';
+                        statusMessage.textContent = 'Failed to upload file.';
                         statusMessage.style.color = 'red';
                     }
                 })
                 .catch(error => {
-                    console.error('Error:', error);
                     statusMessage.textContent = 'An error occurred. Please try again.';
                     statusMessage.style.color = 'red';
                 });

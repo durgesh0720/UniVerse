@@ -21,6 +21,7 @@ urlpatterns=[
     path('update-assignment/',_views.updateAssignment,name="updateAssignment"),
     path('delete-assignment/',_views.deleteAssignment,name="deleteAssignment"),
     path('show-submissions/',_views.showAssignmentSubmissions,name="studentSubmissions"),
+    path('submission-action/',_views.updateStatus,name='submissionaction'),
 
                 # here now manage attendance
 
