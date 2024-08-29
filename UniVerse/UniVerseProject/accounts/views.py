@@ -40,7 +40,7 @@ def log_in(request):
         print(f"Exception of User login: {e}")
         return redirect('login')
     
-login_required(login_url='login')
+@login_required(login_url='login')
 def welcomepage(request):
     try:
         username=request.GET.get('username')

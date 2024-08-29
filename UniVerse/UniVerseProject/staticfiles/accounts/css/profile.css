@@ -1,0 +1,149 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #121212; /* Dark background for the whole page */
+    color: #e0e0e0; /* Light text color for readability */
+    margin: 0;
+    padding: 0;
+}
+
+.profile-container {
+    max-width: 900px;
+    margin: 40px auto;
+    background-color: #1e1e1e; /* Dark background for the profile container */
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    padding-bottom: 20px;
+}
+
+.profile-header {
+    background: linear-gradient(135deg, #1a1a1a, #333333); /* Dark gradient for header */
+    color: #e0e0e0;
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    position: relative;
+}
+
+.profile-picture img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 4px solid #1e1e1e; /* Dark border for profile picture */
+    object-fit: cover;
+    margin-right: 20px;
+}
+
+.profile-info h1 {
+    margin: 0;
+    font-size: 2rem;
+}
+
+.profile-info .role {
+    font-size: 1rem;
+    font-weight: 400;
+    color: #b0b0b0; /* Lighter text for role */
+}
+
+.edit-profile-btn {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    background-color: #ff8c00;
+    border: none;
+    padding: 10px 20px;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.edit-profile-btn:hover {
+    background-color: #ff7000;
+}
+
+.profile-nav {
+    background-color: #333; /* Dark background for navigation */
+    border-bottom: 1px solid #444;
+}
+
+.profile-nav ul {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.profile-nav ul li {
+    flex: 1;
+}
+
+.profile-nav ul li a {
+    display: block;
+    text-align: center;
+    padding: 15px 0;
+    text-decoration: none;
+    color: #e0e0e0;
+    transition: background-color 0.3s;
+}
+
+.profile-nav ul li a:hover {
+    background-color: #444; /* Darker background on hover */
+}
+
+.info-section {
+    padding: 20px;
+    border-bottom: 1px solid #222; /* Darker border for sections */
+}
+
+.info-section:last-child {
+    border-bottom: none;
+}
+
+.info-section h2 {
+    margin-top: 0;
+    font-size: 1.5rem;
+    color: #e0e0e0;
+}
+
+.info-section p {
+    margin: 10px 0;
+    color: #b0b0b0; /* Lighter text for section details */
+}
+
+.footer {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: #333; /* Dark background for footer */
+    border-top: 1px solid #444;
+}
+
+.social-links a, .privacy-settings a {
+    color: #e0e0e0;
+    text-decoration: none;
+    margin-right: 15px;
+    transition: color 0.3s;
+}
+
+.social-links a:hover, .privacy-settings a:hover {
+    color: #ff8c00; /* Highlight color on hover */
+}
+
+.logout-btn {
+    background-color: #dc3545;
+    border: none;
+    padding: 10px 20px;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.logout-btn:hover {
+    background-color: #c82333;
+}
+a{
+    text-decoration: none;
+    color: inherit;
+}

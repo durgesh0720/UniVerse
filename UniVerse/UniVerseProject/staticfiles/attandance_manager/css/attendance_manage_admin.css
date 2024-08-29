@@ -1,0 +1,184 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #121212; /* Dark background color */
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+}
+
+.container {
+    text-align: center;
+    color: #e0e0e0; /* Light text color for contrast */
+}
+
+h1 {
+    margin-top: 20px;
+    font-size: 2rem;
+    color: #e0e0e0;
+}
+
+.button-container {
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid white;
+    width: 100%;
+}
+
+.action-btn {
+    background-color: #03dac6; /* Teal color for buttons */
+    color: black;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.action-btn:hover {
+    background-color: #03a79e;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.616); 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: #1e1e1e; /* Darker background for modal */
+    padding: 20px;
+    border-radius: 15px;
+    width: 80%;
+    max-width: 500px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    position: relative;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 25px;
+    font-weight: bold;
+    color: #e0e0e0;
+    cursor: pointer;
+}
+
+.close:hover {
+    color: #f44336;
+}
+
+.modal form {
+    display: flex;
+    flex-direction: column;
+}
+
+.modal form label {
+    color: #e0e0e0; 
+    font-size: 1rem;
+    margin-bottom: 10px;
+}
+
+.modal form input[type="text"],
+.modal form input[type="number"]{
+    width: 95%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    border: 1px solid #555;
+    background-color: #2e2e2e;
+    color: #e0e0e0;
+    font-size: 1rem;
+}
+
+.modal form input[type="submit"]{
+    background-color: #03dac6;
+    color: black;
+    border: none;
+    padding: 12px;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 1rem;
+    width: 100%;
+}
+
+.modal form input[type="submit"]:hover {
+    background-color: #03a79e;
+}
+
+.modal form input[type="submit"]:active {
+    background-color: #028670;
+}
+/* Make sure this is in your main CSS file */
+.form-container {
+    padding: 20px;
+    background-color: #1e1e1e; /* Dark background for the form container */
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    margin-top: 20px;
+}
+
+.attendance-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0 auto;
+}
+
+.attendance-table th, .attendance-table td{
+    padding: 12px;
+    border: 1px solid #333; /* Darker border color */
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+.attendance-table th {
+    background-color: #333; /* Dark background for headers */
+    color: #e0e0e0; /* Light color for text */
+}
+
+.attendance-table td {
+    background-color: #2e2e2e; /* Dark background for table cells */
+    color: #e0e0e0; /* Light color for text */
+}
+
+.attendance-table input[type="number"]{
+    width: 80px;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #555; /* Slightly lighter border for inputs */
+    background-color: #2e2e2e; /* Dark background for inputs */
+    color: #e0e0e0; /* Light color for text */
+    font-size: 0.9rem;
+}
+
+.submit-btn{
+    background-color: #03dac6; /* Teal color for submit button */
+    color: black;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 0.9rem;
+}
+
+.submit-btn:hover {
+    background-color: #03a79e; /* Darker shade for hover effect */
+}
+
+.submit-btn:active {
+    background-color: #028670; /* Even darker shade for active state */
+}

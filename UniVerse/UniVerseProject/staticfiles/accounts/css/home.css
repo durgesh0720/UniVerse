@@ -1,0 +1,149 @@
+/* Importing Animate.css for animations */
+@import url('https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css');
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #121212;
+    color: #e0e0e0;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+header {
+    background-color: #1e1e1e;
+    padding: 15px 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    color: #03dac6;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 15px;
+}
+
+nav ul li {
+    margin: 10px 30px 10px 5px;
+}
+
+nav ul li button {
+    background-color: #03dac6;
+    color: #121212;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+nav ul li button a {
+    color: #121212;
+    text-decoration: none;
+}
+
+nav ul li button:hover {
+    background-color: #03a89e;
+    transform: translateY(-2px);
+}
+
+#main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 100px;
+    text-align: center;
+}
+
+#hero {
+    margin-bottom: 40px;
+}
+
+#hero h1 {
+    font-size: 3rem;
+    color: #03dac6;
+    margin: 0;
+}
+
+#hero p {
+    font-size: 1.5rem;
+    color: #b0b0b0;
+}
+
+#actions {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+#actions button {
+    background-color: #03dac6;
+    color: #121212;
+    border: none;
+    border-radius: 6px;
+    padding: 12px 24px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+    margin: 10px;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+#actions button a {
+    color: #121212;
+    text-decoration: none;
+    width: 100%;
+    height: 100%;
+}
+
+#actions button:hover {
+    background-color: #03a89e;
+    transform: translateY(-2px);
+}
+
+#or {
+    font-size: 1.5rem;
+    color: #e0e0e0;
+}
+
+#quotes {
+    background-color: #1e1e1e;
+    padding: 30px;
+    border-radius: 8px;
+    margin: 40px auto;
+    max-width: 800px;
+}
+
+blockquote {
+    font-size: 1.2rem;
+    color: #e0e0e0;
+    margin: 20px 0;
+    padding: 15px;
+    border-left: 4px solid #03dac6;
+    font-style: italic;
+}
+
+blockquote footer {
+    font-size: 1rem;
+    color: #b0b0b0;
+    text-align: right;
+}
