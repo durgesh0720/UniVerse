@@ -164,8 +164,6 @@ a{
             <div class="profile-picture">
                 {% if student.profile_picture %}
                     <img src="{{ student.profile_picture.url }}" alt="Profile Picture">
-                {% else %}
-                    <img src="{% static 'images/default-profile.png' %}" alt="Profile Picture">
                 {% endif %}
             </div>
             <div class="profile-info">

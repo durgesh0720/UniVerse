@@ -28,6 +28,8 @@ def signup(request):
     return render(request,"signup.html",d1)
 
 def log_in(request):
+    if request.user.is_authenticated:
+        return redirect(f'/welcome/?username={request.user.username}')
     try:
         d1={}
         try:
@@ -152,6 +154,7 @@ def update_profile(request):
 
             user = get_object_or_404(User, username=username)
             print(f"User found: {user}")
+            print(f'Profile_picture: {profile_picture}')
             student = get_object_or_404(student_registration, user=user)
             print(f"Student registration found: {student}")
 

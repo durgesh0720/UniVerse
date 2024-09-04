@@ -5,7 +5,7 @@ import os
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = BASE_DIR / 'media'
 
 SECRET_KEY = 'django-insecure-=pm2)mz@_b--(t+fg-3a)zgf4_i@!fnts%5pun+r)5&=!b%yn5'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
@@ -19,6 +19,8 @@ CSRF_TRUSTED_ORIGINS = ['http://localhost:9000', 'http://127.0.0.1:9000']
 # Application definition
 
 INSTALLED_APPS = [
+    'daphne',
+    'channels',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -30,6 +32,7 @@ INSTALLED_APPS = [
     'assignments_manager',
     'attendance_manager',
     'class_manager',
+    'socialStream',
 ]
 
 MIDDLEWARE = [
@@ -60,7 +63,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'UniVerseProject.wsgi.application'
+ASGI_APPLICATION = 'UniVerseProject.asgi.application'
 
 
 # Database
@@ -108,12 +111,18 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = "static/"
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
-]
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [BASE_DIR / 'static']
 
-# Default primary key field type
-# https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
+
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [("127.0.0.1", 6379)],
+        },
+    },
+}

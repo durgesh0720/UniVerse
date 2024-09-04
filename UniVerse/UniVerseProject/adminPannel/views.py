@@ -22,6 +22,8 @@ def signupAdmin(request):
     return render(request,"signupAdmin.html")
 
 def loginAdmin(request):
+    if request.user.is_authenticated:
+        return redirect(f'/admin-pannel/admin-pannel/?username={request.user.username}')
     d1={}
     try:
         if request.GET['error']==str(1):
