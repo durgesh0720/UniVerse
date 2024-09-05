@@ -25,13 +25,18 @@ class Socialfeeds(AsyncWebsocketConsumer):
             message = text_data_json.get("message", "")
             file = text_data_json.get('file', None)
             comment=text_data_json.get("comment","")
+            like=text_data_json.get("like","")
+
             if comment:
                 print(f"comment recieved: {comment['text']} Id:{comment['postId']}")
                 await self.commentSave(comment)
-
             if message:
                 await self.save_post(message, file)
                 print(f"Message from client: {message}")
+
+            if like:
+                pass
+
         except json.JSONDecodeError:
             await self.send(text_data=json.dumps({
                 "error": "Invalid JSON format",
@@ -76,6 +81,5 @@ class Socialfeeds(AsyncWebsocketConsumer):
                 await sync_to_async(InstanceComment.save)()
         except Exception as e:
             print(f"Exception occured from save comment: {e}")
-    
-    async def sendComments(self,comment):
-        InstanceOfPost = await sync_to_async(lambda: post.objects.filter(id=comment['postId']).first())()
+    async def likeSave(self,like):
+        pass

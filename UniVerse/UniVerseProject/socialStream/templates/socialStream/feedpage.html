@@ -343,7 +343,7 @@
                     <div class="hidden-data" data-value="{{ post.id|escapejs }}" style="display: none;"></div>
         
                     <div class="post-actions">
-                        <button class="action-btn">Like <i class="fa fa-thumbs-up" aria-hidden="true"></i></button>
+                        <button class="action-btn" id="like">Like <i class="fa fa-thumbs-up" aria-hidden="true"></i></button>
                         <button class="action-btn comment-button" type="button">Comment <i class="fa fa-comment" aria-hidden="true"></i></button>
                     </div>
                     <div class="comment-box" id="comment">
@@ -420,6 +420,12 @@
             togglePostForm(false);
         }
     });
+    document.querySelectorAll("#like").forEach(function(button){
+        button.addEventListener("click",function(){
+            const postId = this.closest(".post").querySelector('.hidden-data').dataset.value;
+            const data={'like':postId}
+        })
+    })
 
     document.querySelectorAll(".send-button").forEach(function(button) {
         button.addEventListener("click", function() {
@@ -437,7 +443,7 @@
 
                 const commentHTML = `
                     <div class="comment">
-                        // <div class="comment-profile-pic" style="background-image: url('profile.url');"></div>
+                         <div class="comment-profile-pic" style="background-image: url('profile.url');"></div>
                         <div class="comment-details">
                             <div class="comment-header">
                                 <span class="comment-username">${username}</span>
