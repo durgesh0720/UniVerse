@@ -22,15 +22,23 @@
         .container {
             width: 100%;
             max-width: 600px;
-            background-color: #242424; /* Dark gray background for the container */
+            background-color: #242424;
             border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5); /* Subtle shadow */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5); 
             padding: 20px;
             overflow-y: auto;
-            max-height: 90vh; /* Allow the container to be scrollable */
+            max-height: 90vh; 
         }
 
-        /* Post creation area */
+        .container {
+            -ms-overflow-style: none;  /* Internet Explorer 10+ */
+            scrollbar-width: none;  /* Firefox */
+        }
+
+        .container::-webkit-scrollbar {
+            display: none;  /* Safari and Chrome */
+        }
+        
         .post-create {
             display: flex;
             align-items: center;
@@ -40,7 +48,7 @@
         .profile-pic {
             width: 50px;
             height: 50px;
-            background-color: #0073b1; /* LinkedIn blue for profile pic */
+            background-color: #0073b1; 
             border-radius: 50%;
             margin-right: 10px;
             background-size: cover;
@@ -51,12 +59,12 @@
             flex: 1;
             padding: 12px 15px;
             border-radius: 30px;
-            border: 1px solid #444; /* Dark border for the input */
+            border: 1px solid #444; 
             outline: none;
-            background-color: #333; /* Dark gray background for the input */
+            background-color: #333;
             font-size: 16px;
             cursor: pointer;
-            color: #e0e0e0; /* Light text color */
+            color: #e0e0e0; 
         }
 
         /* Hidden post form */
@@ -71,10 +79,10 @@
             width: 100%;
             padding: 10px;
             border-radius: 8px;
-            border: 1px solid #444; /* Dark border */
+            border: 1px solid #444; 
             font-size: 16px;
-            background-color: #333; /* Dark background */
-            color: #e0e0e0; /* Light text color */
+            background-color: #333; 
+            color: #e0e0e0; 
             resize: none;
             margin-bottom: 10px;
         }
@@ -289,13 +297,13 @@
 
         .comment-timestamp {
             font-size: 12px;
-            color: #bbb; /* Medium gray for timestamps */
+            color: #bbb;
         }
 
         .comment-text {
             margin-top: 5px;
             font-size: 14px;
-            color: #e0e0e0; /* Light text color */
+            color: #e0e0e0;
         }
     </style>
 </head>
@@ -343,8 +351,17 @@
                     <div class="hidden-data" data-value="{{ post.id|escapejs }}" style="display: none;"></div>
         
                     <div class="post-actions">
-                        <button class="action-btn" id="like">Like <i class="fa fa-thumbs-up" aria-hidden="true"></i></button>
-                        <button class="action-btn comment-button" type="button">Comment <i class="fa fa-comment" aria-hidden="true"></i></button>
+                        <button class="action-btn" id="like">
+                            {% if post.likes %}
+                                <span id="likeCount">{{ post.likes }}</span>
+                            {% endif %}
+                            <span id="likeStatus">{{ post.likeStatus }}</span>
+                            <i class="fa fa-thumbs-up" aria-hidden="true"></i>
+                        </button>
+                        <button class="action-btn comment-button" type="button">
+                            {{post.commentCount}} Comment 
+                            <i class="fa fa-comment" aria-hidden="true"></i>
+                        </button>
                     </div>
                     <div class="comment-box" id="comment">
                         <textarea placeholder="Leave you comment..." class="commentArea"></textarea>
@@ -373,161 +390,186 @@
     </div>
 
     <script>
-    document.addEventListener("DOMContentLoaded", function() {
-    const sessionid = getCookie('sessionid');
-    const socket = new WebSocket(`ws://${window.location.host}/ws/feeds/?sessionid=${sessionid}`);
+            document.addEventListener("DOMContentLoaded", function() {
+                const sessionid = getCookie('sessionid');
+                const socket = new WebSocket(`ws://${window.location.host}/ws/feeds/?sessionid=${sessionid}`);
 
-    socket.onmessage = function(e) {
-        const data = JSON.parse(e.data);
-        console.log("Message received from server:", data);
+                socket.onmessage = function(e) {
+                    const data = JSON.parse(e.data);
+                    console.log("Message received from server:", data);
 
-        if (data.posts) {
-            addPostToDOM(data.posts);
-        }
-    };
-
-    socket.onerror = function(e) {
-        console.error("WebSocket error:", e);
-    };
-
-    socket.onclose = function(e) {
-        console.error("WebSocket closed unexpectedly:", e);
-    };
-
-
-    document.getElementById("post-submit").addEventListener("click", function(){
-        const postText = document.getElementById("post-text").value;
-        const fileInput = document.getElementById("file-upload");
-        const file = fileInput.files[0];
-
-        if (postText.trim() !== "" || file) {
-            const data = { 'message': postText };
-
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    data['file'] = e.target.result;
-                    data['fileName'] = file.name;
-                    socket.send(JSON.stringify(data));
+                    if (data.posts) {
+                        addPostToDOM(data.posts);
+                        
+                    }
+                    if (data.likeStatus){
+                        updateLikeStatus(data.likeStatus);
+                    }
                 };
-                reader.readAsDataURL(file);
-            } else {
-                socket.send(JSON.stringify(data));
-            }
 
-            document.getElementById("post-text").value = '';
-            fileInput.value = '';
-            togglePostForm(false);
-        }
-    });
-    document.querySelectorAll("#like").forEach(function(button){
-        button.addEventListener("click",function(){
-            const postId = this.closest(".post").querySelector('.hidden-data').dataset.value;
-            const data={'like':postId}
-        })
-    })
-
-    document.querySelectorAll(".send-button").forEach(function(button) {
-        button.addEventListener("click", function() {
-            const commentBox = this.closest(".post").querySelector(".comment-box textarea");
-            const comment = commentBox.value;
-            const postId = this.closest(".post").querySelector('.hidden-data').dataset.value;
-            const username=document.getElementById('username').textContent;
-            const profile=document.getElementById('img').textContent;
-
-            if(comment.trim() !== "") {
-                const data={
-                    'comment':{"text":comment,'postId':postId}
+                socket.onerror = function(e) {
+                    console.error("WebSocket error:", e);
                 };
-                socket.send(JSON.stringify(data));
 
-                const commentHTML = `
-                    <div class="comment">
-                         <div class="comment-profile-pic" style="background-image: url('profile.url');"></div>
-                        <div class="comment-details">
-                            <div class="comment-header">
-                                <span class="comment-username">${username}</span>
-                                <span class="comment-timestamp">Just now</span>
-                            </div>
-                            <div class="comment-text">${comment}</div>
-                        </div>
-                    </div>
-                `;
-                this.closest(".post").querySelector("#comments").innerHTML += commentHTML;
-            }
-
-            commentBox.value = "";
-        });
-    });
+                socket.onclose = function(e) {
+                    console.error("WebSocket closed unexpectedly:", e);
+                };
 
 
+                document.getElementById("post-submit").addEventListener("click", function(){
+                    const postText = document.getElementById("post-text").value;
+                    const fileInput = document.getElementById("file-upload");
+                    const file = fileInput.files[0];
 
-    document.getElementById("post-input").addEventListener("click", function() {
-        togglePostForm(true);
-    });
+                    if (postText.trim() !== "" || file) {
+                        const data = { 'message': postText };
 
-    function togglePostForm(show) {
-        const postForm = document.getElementById("post-form");
-        const postInput = document.getElementById("post-input");
-        if (show) {
-            postForm.style.display = 'flex'; 
-            postInput.style.display = 'none';
-            document.getElementById("post-text").focus(); 
-        } else {
-            postForm.style.display = 'none'; 
-            postInput.style.display = 'flex'; 
-        }
-    }
+                        if (file) {
+                            const reader = new FileReader();
+                            reader.onload = function(e) {
+                                data['file'] = e.target.result;
+                                data['fileName'] = file.name;
+                                socket.send(JSON.stringify(data));
+                            };
+                            reader.readAsDataURL(file);
+                        } else {
+                            socket.send(JSON.stringify(data));
+                        }
 
-    function getCookie(name) {
-        let cookieValue = null;
-        if (document.cookie && document.cookie !== '') {
-            const cookies = document.cookie.split(';');
-            for (let i = 0; i < cookies.length; i++) {
-                const cookie = cookies[i].trim();
-                if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                    break;
+                        document.getElementById("post-text").value = '';
+                        fileInput.value = '';
+                        togglePostForm(false);
+                    }
+                });
+                document.querySelectorAll("#like").forEach(function(button){
+                    button.addEventListener("click",function(){
+                        const postId = this.closest(".post").querySelector('.hidden-data').dataset.value;
+                        const likeStatus=document.getElementById("likeStatus");
+                        
+                        const data={'like':postId}
+                        socket.send(JSON.stringify(data));
+                    })
+                })
+                function updateLikeStatus(posts) {
+                    const postId = posts.postId;  // Ensure the post ID is passed in the response
+                    const likeStatus = posts.likeStatus;
+                    const likeCount=posts.likeCount;
+
+                    // Find the post with the corresponding post ID and update the like status
+                    document.querySelectorAll(".post").forEach(function(post) {
+                        const currentPostId = post.querySelector('.hidden-data').dataset.value;
+                        const likeCountI=document.getElementById("likeCount")
+
+                        if (currentPostId == postId) {
+                            const likeButton = post.querySelector("#likeStatus");
+                            likeButton.textContent = likeStatus;  // Update the like button text
+                            likeCountI.innerText=likeCount                          
+                        }
+                    });
                 }
-            }
-        }
-        return cookieValue;
-    }
 
-    function addPostToDOM(post) {
-    const postList = document.getElementById("post-list");
-    const postDiv = document.createElement("div");
-    postDiv.className = "post";
 
-    postDiv.innerHTML += `
-        <div class="post-header">
-            <div class="profile-pic" style="background-image: url('${post.profile}');"></div>
-            <div class="post-details">
-                <h3>${post.username}</h3>
-                <p>${post.timestamp}</p>
-            </div>
-        </div>
-        <div class="post-content">
-            <div>${post.content}</div>
-            `
-            if(post.file){
-            `
-            <div style="text-align: center;">
-               ${post.file} 
-            </div>
-            `
-            }
-            `
-        </div>
-        <div class="post-actions">
-            <button class="action-btn">Like</button>
-            <button class="action-btn">Comment</button>
-        </div>
-    `;
-    postList.prepend(postDiv);
-}
+                document.querySelectorAll(".send-button").forEach(function(button) {
+                    button.addEventListener("click", function() {
+                        const commentBox = this.closest(".post").querySelector(".comment-box textarea");
+                        const comment = commentBox.value;
+                        const postId = this.closest(".post").querySelector('.hidden-data').dataset.value;
+                        const username=document.getElementById('username').textContent;
+                        const profile=document.getElementById('img').textContent;
 
-});
+                        if(comment.trim() !== "") {
+                            const data={
+                                'comment':{"text":comment,'postId':postId}
+                            };
+                            socket.send(JSON.stringify(data));
+
+                            const commentHTML = `
+                                <div class="comment">
+                                    <div class="comment-profile-pic" style="background-image: url('profile.url');"></div>
+                                    <div class="comment-details">
+                                        <div class="comment-header">
+                                            <span class="comment-username">${username}</span>
+                                            <span class="comment-timestamp">Just now</span>
+                                        </div>
+                                        <div class="comment-text">${comment}</div>
+                                    </div>
+                                </div>
+                            `;
+                            this.closest(".post").querySelector("#comments").innerHTML += commentHTML;
+                        }
+
+                        commentBox.value = "";
+                    });
+                });
+
+
+
+                document.getElementById("post-input").addEventListener("click", function() {
+                    togglePostForm(true);
+                });
+
+                function togglePostForm(show) {
+                    const postForm = document.getElementById("post-form");
+                    const postInput = document.getElementById("post-input");
+                    if (show) {
+                        postForm.style.display = 'flex'; 
+                        postInput.style.display = 'none';
+                        document.getElementById("post-text").focus(); 
+                    } else {
+                        postForm.style.display = 'none'; 
+                        postInput.style.display = 'flex'; 
+                    }
+                }
+
+                function getCookie(name) {
+                    let cookieValue = null;
+                    if (document.cookie && document.cookie !== '') {
+                        const cookies = document.cookie.split(';');
+                        for (let i = 0; i < cookies.length; i++) {
+                            const cookie = cookies[i].trim();
+                            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                                break;
+                            }
+                        }
+                    }
+                    return cookieValue;
+                }
+
+                function addPostToDOM(post) {
+                    const postList = document.getElementById("post-list");
+                    const postDiv = document.createElement("div");
+                    postDiv.className = "post";
+
+                    postDiv.innerHTML += `
+                        <div class="post-header">
+                            <div class="profile-pic" style="background-image: url('${post.profile}');"></div>
+                            <div class="post-details">
+                                <h3>${post.username}</h3>
+                                <p>${post.timestamp}</p>
+                            </div>
+                        </div>
+                        <div class="post-content">
+                            <div>${post.content}</div>
+                            `
+                            if(post.file){
+                            `
+                            <div style="text-align: center;">
+                            ${post.file} 
+                            </div>
+                            `
+                            }
+                            `
+                        </div>
+                        <div class="post-actions">
+                            <button class="action-btn">Like</button>
+                            <button class="action-btn">Comment</button>
+                        </div>
+                    `;
+                    postList.prepend(postDiv);
+                }
+
+        });
 
 </script>
 

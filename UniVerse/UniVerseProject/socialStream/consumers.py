@@ -1,6 +1,6 @@
 from channels.generic.websocket import AsyncWebsocketConsumer
 from django.contrib.auth.models import User
-from .models import post,Comment  # Correct the model name to Post
+from .models import post,Comment,Like  # Correct the model name to Post
 import json
 from datetime import datetime
 from accounts.models import student_registration
@@ -35,7 +35,8 @@ class Socialfeeds(AsyncWebsocketConsumer):
                 print(f"Message from client: {message}")
 
             if like:
-                pass
+                await self.likeSave(like)
+                print(f" Like at {like} This post. User {self.user}")
 
         except json.JSONDecodeError:
             await self.send(text_data=json.dumps({
@@ -81,5 +82,37 @@ class Socialfeeds(AsyncWebsocketConsumer):
                 await sync_to_async(InstanceComment.save)()
         except Exception as e:
             print(f"Exception occured from save comment: {e}")
-    async def likeSave(self,like):
-        pass
+
+    async def likeSave(self, postId):
+        posts = {}
+        try:
+            post_instance = await database_sync_to_async(post.objects.filter(id=postId).first)()
+            if post_instance:
+                existing_like = await database_sync_to_async(Like.objects.filter(user=self.user, post=post_instance).first)()
+
+                if existing_like:
+                    print(f"User {self.user} has already liked post {postId}")
+                    await database_sync_to_async(existing_like.delete)()
+                    posts['likeStatus'] = "Like"
+
+                else:
+                    like_instance = Like(
+                        user=self.user,
+                        post=post_instance,
+                        timestamp=datetime.now(),  
+                    )
+                    print("Saving like for post ID:", postId)
+                    await database_sync_to_async(like_instance.save)()
+                    posts['likeStatus'] = "Liked"
+                
+                posts['postId'] = postId
+            
+            like_count = await database_sync_to_async(Like.objects.filter(id=postId).count)()
+            posts['likeCount'] = like_count
+            await self.send(text_data=json.dumps({
+                'likeStatus': posts
+            }))
+            
+        except Exception as e:
+            print(f"Exception occurred while saving like: {e}")
+
