@@ -7,7 +7,7 @@ from accounts.models import student_registration
 def feedpage(request):
     user = request.user
     posts_data = []
-    
+
     try:
         student = student_registration.objects.filter(user=user).first()
         posts = post.objects.all().order_by('-timestamp').select_related('user')
@@ -19,11 +19,9 @@ def feedpage(request):
             like_count = Like.objects.filter(post=Post).count()
             comments_count = Comment.objects.filter(post=Post).count()
 
-            # Check if the user has liked this post
             user_likes_post = Like.objects.filter(post=Post, user=user).exists()
             is_like = "Unlike" if user_likes_post else "Like"
-            
-            # Prepare post data
+
             post_data = {
                 'username': Post.user.username,
                 'text': Post.content,
@@ -33,7 +31,7 @@ def feedpage(request):
                 'comments': comments,
                 'likes': like_count,
                 'commentCount':comments_count,
-                'likeStatus': is_like,  # Set like status
+                'likeStatus': is_like, 
             }
             
             if Post.file:

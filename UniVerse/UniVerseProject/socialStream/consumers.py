@@ -1,6 +1,6 @@
 from channels.generic.websocket import AsyncWebsocketConsumer
 from django.contrib.auth.models import User
-from .models import post,Comment,Like  # Correct the model name to Post
+from .models import post,Comment,Like  
 import json
 from datetime import datetime
 from accounts.models import student_registration
@@ -13,6 +13,7 @@ class Socialfeeds(AsyncWebsocketConsumer):
         if self.user.is_authenticated:
             print(f"Now User is {self.user} and username is {self.user.username}")
             await self.accept()  # Await accept()
+
         else:
             await self.close()  # Await close()
     
@@ -115,4 +116,9 @@ class Socialfeeds(AsyncWebsocketConsumer):
             
         except Exception as e:
             print(f"Exception occurred while saving like: {e}")
+
+    
+    def follow(self):
+        posts={}
+        
 

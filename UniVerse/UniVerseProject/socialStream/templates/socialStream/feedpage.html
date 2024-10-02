@@ -451,19 +451,19 @@
                     })
                 })
                 function updateLikeStatus(posts) {
-                    const postId = posts.postId;  // Ensure the post ID is passed in the response
+                    const postId = posts.postId; 
                     const likeStatus = posts.likeStatus;
                     const likeCount=posts.likeCount;
 
                     // Find the post with the corresponding post ID and update the like status
-                    document.querySelectorAll(".post").forEach(function(post) {
+                    document.querySelectorAll(".post").forEach(function(post){
                         const currentPostId = post.querySelector('.hidden-data').dataset.value;
                         const likeCountI=document.getElementById("likeCount")
 
-                        if (currentPostId == postId) {
+                        if (currentPostId == postId){
                             const likeButton = post.querySelector("#likeStatus");
                             likeButton.textContent = likeStatus;  // Update the like button text
-                            likeCountI.innerText=likeCount                          
+                            likeCountI.innerText=likeCount;                          
                         }
                     });
                 }
@@ -482,10 +482,10 @@
                                 'comment':{"text":comment,'postId':postId}
                             };
                             socket.send(JSON.stringify(data));
-
+// <div class="comment-profile-pic" style="background-image: url('profile.url');"></div>
                             const commentHTML = `
                                 <div class="comment">
-                                    <div class="comment-profile-pic" style="background-image: url('profile.url');"></div>
+                                    
                                     <div class="comment-details">
                                         <div class="comment-header">
                                             <span class="comment-username">${username}</span>
@@ -497,7 +497,6 @@
                             `;
                             this.closest(".post").querySelector("#comments").innerHTML += commentHTML;
                         }
-
                         commentBox.value = "";
                     });
                 });

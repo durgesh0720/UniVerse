@@ -122,7 +122,8 @@ CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "channels_redis.core.RedisChannelLayer",
         "CONFIG": {
-            "hosts": [("127.0.0.1", 6379)],
+            "hosts": ["rediss://:AeSXAAIjcDE4M2M1OThlMWI3MGI0Y2NjYTg2MzE4ODM1YzZjZjQxN3AxMA@up-koi-58519.upstash.io:6379"]
         },
     },
 }
+
