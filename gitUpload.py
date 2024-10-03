@@ -6,7 +6,7 @@ try:
     n = len(sys.argv)
     n=f'{n} {dt}'
     if not n:
-        n="Push code: {dt}"
+        n=f"Push code: {dt}"
 
     def pushCode(n):
         os.system("git add .")
@@ -18,3 +18,5 @@ try:
     pushCode(n)
 except Exception as e:
     print(f"Exception Occured by: {e}")
+
+
