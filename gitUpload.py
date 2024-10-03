@@ -1,14 +1,20 @@
 import sys
 import os
+import datetime
+try:
+    dt = datetime.datetime.now()
+    n = len(sys.argv)
+    n=f'{n} {dt}'
+    if not n:
+        n="Push code: {dt}"
 
-n = len(sys.argv)
+    def pushCode(n):
+        os.system("git add .")
+        os.system(f""" git commit -m '{n}' """)
+        os.system("git push")
 
-if not n:
-    n="deafult push"
+        print(f"Code is pushed on github at: {dt}, N: {n}")
 
-def pushCode(n):
-    os.system("git add .")
-    os.system(f"git commit -m {n}")
-    os.system("git push")
-
-pushCode(n)
+    pushCode(n)
+except Exception as e:
+    print(f"Exception Occured by: {e}")
